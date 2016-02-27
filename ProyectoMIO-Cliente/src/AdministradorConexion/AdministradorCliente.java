@@ -1,8 +1,7 @@
-package ConnectionManagement;
+package AdministradorConexion;
 
 import Model.Messages.Reply;
 import Model.Messages.Request;
-import Model.Entities.Employee;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -10,11 +9,15 @@ import java.net.Socket;
 
 /**
  *
- * ClientManager 16/01/2016
- *
- * @author Alvaro Jose Lobaton Restrepo
+ * AdministradorCliente
+ * 
+ * @author Mauricio Bernardo Dominguez Bocanegra. Código: 9927680
+ * @author Martha Cecilia Holguin Tovar. Código: 1129455
+ * @author Jesús Alberto Ramírez Otálvaro. Código: 1422554
+ * 
  */
-public class ClientManager {
+
+public class AdministradorCliente {
 
     private final int PUERTO = 1234;
     private final String HOST = "localhost";
@@ -22,45 +25,45 @@ public class ClientManager {
     protected ObjectOutputStream output;
     private ObjectInputStream input;
 
-    public ClientManager() {        
+    public AdministradorCliente() {        
     }
     
-    public void connect() throws IOException {
+    public void conectar() throws IOException {
         clientSocket = new Socket(HOST, PUERTO); 
     }
     
-    public void disconnect() throws IOException  {        
+    public void desconectar() throws IOException  {        
         clientSocket.close();        
         output.close();
         input.close();
     }
     
-    public void setFlows() throws IOException {
+    public void flujos() throws IOException {
         output = new ObjectOutputStream(clientSocket.getOutputStream());
         output.flush();
         input = new ObjectInputStream(clientSocket.getInputStream());
     }
     
-    public void send(Object object) throws IOException {
+    public void enviar(Object object) throws IOException {
         output.writeObject(object);
         //output.flush();
     }
     
-    public Object receive() throws IOException, ClassNotFoundException {
+    public Object recibir() throws IOException, ClassNotFoundException {
         return input.readObject();
     }
 
-    public Reply doRequest(Request request) throws IOException, ClassNotFoundException {
+    public Reply peticion(Request request) throws IOException, ClassNotFoundException {
         // Nos conectamos.
-        connect();
+        conectar();
         // Seteamos los flujos de entrada salida.
-        setFlows();
+        flujos();
         // Informamos que servicio requerimos del servidor.
-        send(request); 
+        enviar(request); 
         // Recibimos datos o estados del servidor.        
-        Reply reply = (Reply) receive();
+        Reply reply = (Reply) recibir();
         // Cerramos la conexión.
-        disconnect();
+        desconectar();
         // Retornamos la respuesta.
         return reply;
     }
