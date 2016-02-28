@@ -42,11 +42,11 @@ INSERT INTO parada VALUES (10, 5, TRUE);
 
 --Insertamos datos en la tabla RECORRIDO:
 
-INSERT INTO recorrido VALUES (1, TRUE);
-INSERT INTO recorrido VALUES (2, TRUE);
-INSERT INTO recorrido VALUES (3, TRUE);
-INSERT INTO recorrido VALUES (4, TRUE);
-INSERT INTO recorrido VALUES (5, TRUE);
+INSERT INTO recorrido VALUES (1, 'Norte', TRUE);
+INSERT INTO recorrido VALUES (2, 'Sur', TRUE);
+INSERT INTO recorrido VALUES (3, 'Sur-Oriente', TRUE);
+INSERT INTO recorrido VALUES (4, 'Occidente',TRUE);
+INSERT INTO recorrido VALUES (5, 'NorOccidente',TRUE);
 
 ----------------------------------------------------------------------------------------------------------------------------------
 
