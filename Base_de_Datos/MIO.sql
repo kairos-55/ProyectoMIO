@@ -66,6 +66,7 @@ DROP TABLE IF EXISTS recorrido CASCADE;
 CREATE TABLE recorrido
 (
 	id_recorrido INTEGER NOT NULL,
+	nombre VARCHAR(20) NOT NULL,
 	estado_recorrido BOOLEAN NOT NULL,
 
 	CONSTRAINT recorrido_pk PRIMARY KEY (id_recorrido)
