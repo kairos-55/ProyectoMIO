@@ -1,29 +1,32 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Tablas;
 
 /**
  *
- * @author jesusaro
+ * Empleado
+ * 
+ * @author Mauricio Bernardo Dominguez Bocanegra. Código: 9927680
+ * @author Martha Cecilia Holguin Tovar. Código: 1129455
+ * @author Jesús Alberto Ramírez Otálvaro. Código: 1422554
+ * 
  */
+
 public class Empleado {
     
     private String cedula;
     private double salario;
-    private String nombre;
+    private String nombres;
+    private String apellidos;
     private String telefono;
     private String fechaNacimiento;
     private String estadoCivil;
     private String cargo;
         
-    public Empleado(String cedula, double salario, String nombre, String telefono, String fechaNacimiento, String estadoCivil, String cargo) {
+    public Empleado(String cedula, double salario, String nombre, String apellidos, String telefono, String fechaNacimiento, String estadoCivil, String cargo) {
         
         this.cedula = cedula;
         this.salario = salario;
-        this.nombre = nombre;
+        this.nombres = nombres;
+        this.apellidos = apellidos;
         this.telefono = telefono;
         this.fechaNacimiento = fechaNacimiento;
         this.estadoCivil = estadoCivil;
@@ -47,14 +50,22 @@ public class Empleado {
         return salario;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombres(String nombres) {
+        this.nombres = nombres;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getNombres() {
+        return nombres;
     }
 
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
+    }
+
+    public String getApellidos() {
+        return apellidos;
+    }    
+    
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }

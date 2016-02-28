@@ -2,7 +2,7 @@ package Modelo.Entidades;
 
 /**
  *
- * MainCliente
+ * Parada_Recorrido
  * 
  * @author Mauricio Bernardo Dominguez Bocanegra. Código: 9927680
  * @author Martha Cecilia Holguin Tovar. Código: 1129455
@@ -10,24 +10,16 @@ package Modelo.Entidades;
  * 
  */
 
-public class Ruta {
+public class Parada_Recorrido {
     
-    private String nombre;
     private int idRecorrido;
+    private int idParada;
+    
+    public Parada_Recorrido(int idRecorrido, int idParada){
         
-    public Ruta(String nombre, int idRecorrido) {
-        
-        this.nombre = nombre;
         this.idRecorrido = idRecorrido;
+        this.idParada = idParada;        
         
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getNombre() {
-        return nombre;
     }
 
     public void setIdRecorrido(int idRecorrido) {
@@ -36,6 +28,14 @@ public class Ruta {
 
     public int getIdRecorrido() {
         return idRecorrido;
+    }
+
+    public void setIdParada(int id_parada) {
+        this.idParada = id_parada;
+    }
+
+    public int getIdParada() {
+        return idParada;
     }   
     
 }

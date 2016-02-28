@@ -19,7 +19,7 @@ public class MainCliente {
      */
     public static void main(String[] args) {
         
-        VentanaPrincipal ventanaPrincipal = new VentanaPrincipal(); 
+        VentanaPrincipal ventanaPrincipal = new VentanaPrincipal("Proyecto MIO"); 
         
     }
     

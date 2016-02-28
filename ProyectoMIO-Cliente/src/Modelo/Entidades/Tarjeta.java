@@ -1,27 +1,28 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package Tablas;
+package Modelo.Entidades;
 
 /**
  *
- * @author jesusaro
+ * Tarjeta
+ * 
+ * @author Mauricio Bernardo Dominguez Bocanegra. Código: 9927680
+ * @author Martha Cecilia Holguin Tovar. Código: 1129455
+ * @author Jesús Alberto Ramírez Otálvaro. Código: 1422554
+ * 
  */
+
 public class Tarjeta {
     
     private String id;
     private double saldo;
-    private String estado;
-    private String puntoVenta;
+    private int punto_venta;
+    private String empleado_vendedor;
         
-    public Tarjeta(String id, double saldo, String estado, String puntoVenta) {
+    public Tarjeta(String id, double saldo, int punto_venta, String empleado_vendedor) {
         
         this.id = id;
         this.saldo = saldo;
-        this.estado = estado;
-        this.puntoVenta = puntoVenta;
+        this.punto_venta = punto_venta;
+        this.empleado_vendedor = empleado_vendedor;
         
     }
 
@@ -41,20 +42,20 @@ public class Tarjeta {
         return saldo;
     }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
+    public void setPunto_venta(int punto_venta) {
+        this.punto_venta = punto_venta;
     }
 
-    public String getEstado() {
-        return estado;
+    public int getPunto_venta() {
+        return punto_venta;
     }
 
-    public void setPuntoVenta(String puntoVenta) {
-        this.puntoVenta = puntoVenta;
+    public void setEmpleado_vendedor(String empleado_vendedor) {
+        this.empleado_vendedor = empleado_vendedor;
     }
 
-    public String getPuntoVenta() {
-        return puntoVenta;
-    }   
+    public String getEmpleado_vendedor() {
+        return empleado_vendedor;
+    }      
 
 }

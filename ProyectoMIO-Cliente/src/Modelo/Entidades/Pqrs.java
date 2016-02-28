@@ -1,33 +1,34 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package Tablas;
+package Modelo.Entidades;
 
 /**
  *
- * @author jesusaro
+ * Pqrs
+ * 
+ * @author Mauricio Bernardo Dominguez Bocanegra. Código: 9927680
+ * @author Martha Cecilia Holguin Tovar. Código: 1129455
+ * @author Jesús Alberto Ramírez Otálvaro. Código: 1422554
+ * 
  */
+
 public class Pqrs {
     
     private String cedulaEmpleado;
-    private String nombreEstacion;
-    private String estado;
+    private int idEstacion;    
     private String fecha;
     private String motivo;
     private String cedulaUsuario;
     private String descripcion;
+    private String estado;
         
-    public Pqrs(String cedulaEmpleado, String nombreEstacion, String estado, String fecha, String motivo, String cedulaUsuario, String descripcion) {
+    public Pqrs(String cedulaEmpleado, int idEstacion, String fecha, String motivo, String cedulaUsuario, String descripcion, String estado) {
         
         this.cedulaEmpleado = cedulaEmpleado;
-        this.nombreEstacion = nombreEstacion;
-        this.estado = estado;
+        this.idEstacion = idEstacion;        
         this.fecha = fecha;
         this.motivo = motivo;
         this.cedulaUsuario = cedulaUsuario;
         this.descripcion = descripcion;
+        this.estado = estado;
                 
     }
 
@@ -39,21 +40,13 @@ public class Pqrs {
         return cedulaEmpleado;
     }
 
-    public void setNombreEstacion(String nombreEstacion) {
-        this.nombreEstacion = nombreEstacion;
+    public void setidEstacion(int nombreEstacion) {
+        this.idEstacion = nombreEstacion;
     }   
 
-    public String getNombreEstacion() {
-        return nombreEstacion;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
+    public int getidEstacion() {
+        return idEstacion;
+    }    
 
     public void setFecha(String fecha) {
         this.fecha = fecha;
@@ -85,6 +78,14 @@ public class Pqrs {
 
     public String getDescripcion() {
         return descripcion;
-    }   
+    }  
+    
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
 
 }

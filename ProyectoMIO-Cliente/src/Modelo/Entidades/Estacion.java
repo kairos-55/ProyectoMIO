@@ -1,32 +1,39 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package Tablas;
+package Modelo.Entidades;
 
 /**
  *
- * @author jesusaro
+ * Estacion
+ * 
+ * @author Mauricio Bernardo Dominguez Bocanegra. Código: 9927680
+ * @author Martha Cecilia Holguin Tovar. Código: 1129455
+ * @author Jesús Alberto Ramírez Otálvaro. Código: 1422554
+ * 
  */
+
 public class Estacion {
     
+    private int id;
     private String nombre;
     private String direccion;
     private String cedulaDirector;
-    private int paradaRuta;
-    private String nombreRuta;
-        
-    public Estacion(String nombre, String direccion, String cedulaDirector, int paradaRuta, String nombreRuta) {
+           
+    public Estacion(int id, String nombre, String direccion, String cedulaDirector) {
      
+        this.id = id;
         this.nombre = nombre;
         this.direccion = direccion;
         this.cedulaDirector = cedulaDirector;
-        this.paradaRuta = paradaRuta;
-        this.nombreRuta = nombreRuta;
-                
+                        
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+      
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
@@ -49,22 +56,6 @@ public class Estacion {
 
     public String getCedulaDirector() {
         return cedulaDirector;
-    }
-
-    public void setParadaRuta(int paradaRuta) {
-        this.paradaRuta = paradaRuta;
-    }
-
-    public int getParadaRuta() {
-        return paradaRuta;
-    }
-
-    public void setNombreRuta(String nombreRuta) {
-        this.nombreRuta = nombreRuta;
-    }
-
-    public String getNombreRuta() {
-        return nombreRuta;
     }   
 
 }

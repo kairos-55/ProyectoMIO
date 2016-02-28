@@ -1,34 +1,31 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package Tablas;
+package Modelo.Entidades;
 
 /**
  *
- * @author jesusaro
+ * Bus
+ * 
+ * @author Mauricio Bernardo Dominguez Bocanegra. Código: 9927680
+ * @author Martha Cecilia Holguin Tovar. Código: 1129455
+ * @author Jesús Alberto Ramírez Otálvaro. Código: 1422554
+ * 
  */
+
 public class Bus {
     
     private String placa;
     private String modelo;
     private String marca;
     private int capacidad;
-    private String tipo;
-    private int paradaRuta;
-    private String nombreRuta;    
+    private String tipo;     
     
-    public Bus(String placa, String modelo, String marca, int capacidad, String tipo, int paradaRuta, String nombreRuta) {
+    public Bus(String placa, String modelo, String marca, int capacidad, String tipo) {
         
         this.placa = placa;
         this.modelo = modelo;
         this.marca = marca;
         this.capacidad = capacidad;
         this.tipo = tipo;
-        this.paradaRuta = paradaRuta;
-        this.nombreRuta = nombreRuta;
-                
+                        
     }
 
     public void setPlaca(String placa) {
@@ -69,22 +66,6 @@ public class Bus {
 
     public String getTipo() {
         return tipo;
-    }
-
-    public void setParadaRuta(int paradaRuta) {
-        this.paradaRuta = paradaRuta;
-    }
-
-    public int getParadaRuta() {
-        return paradaRuta;
-    }
-
-    public void setNombreRuta(String nombreRuta) {
-        this.nombreRuta = nombreRuta;
-    }
-
-    public String getNombreRuta() {
-        return nombreRuta;
-    }    
+    }   
         
 }

@@ -1,23 +1,24 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package Tablas;
+package Modelo.Entidades;
 
 /**
  *
- * @author jesusaro
+ * Usuario
+ * 
+ * @author Mauricio Bernardo Dominguez Bocanegra. Código: 9927680
+ * @author Martha Cecilia Holguin Tovar. Código: 1129455
+ * @author Jesús Alberto Ramírez Otálvaro. Código: 1422554
+ * 
  */
+
 public class Usuario {
     
     private String cedula;
-    private String idTarjeta;
+    private int idTarjeta;
     private String nombre;
     private String telefono;
     private String direccion;
         
-    public Usuario(String cedula, String idTarjeta, String nombre, String telefono, String direccion) {
+    public Usuario(String cedula, int idTarjeta, String nombre, String telefono, String direccion) {
         
         this.cedula = cedula;
         this.idTarjeta = idTarjeta;
@@ -35,11 +36,11 @@ public class Usuario {
         return cedula;
     }
 
-    public void setIdTarjeta(String idTarjeta) {
+    public void setIdTarjeta(int idTarjeta) {
         this.idTarjeta = idTarjeta;
     }
 
-    public String getIdTarjeta() {
+    public int getIdTarjeta() {
         return idTarjeta;
     }
 
