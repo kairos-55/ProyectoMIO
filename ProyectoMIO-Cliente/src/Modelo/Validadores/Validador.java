@@ -23,7 +23,7 @@ public class Validador {
      */
     public void validarCamposVacios(String[] informacion) throws MiExcepcion {
         for (String dato : informacion) {
-            validarCampoVacio(dato);
+            validarCampoVacio(dato,"");
         }
     }
 
@@ -34,9 +34,12 @@ public class Validador {
      * @param dato Dato.
      * @throws MiExcepcion
      */
-    public void validarCampoVacio(String dato) throws MiExcepcion {
-        if ("".equals(dato)) {
-            throw new MiExcepcion("Debes llenar todos los campos.");
+    public void validarCampoVacio(String dato, String nombreCampo) throws MiExcepcion {
+        
+        if(dato==null){
+            throw new MiExcepcion(nombreCampo + " es un campo obligatorio.");
+        }else if (dato.trim()==null) {
+            throw new MiExcepcion(nombreCampo + " es un campo obligatorio.");
         }
     }
     
@@ -60,15 +63,15 @@ public class Validador {
     /**
      * validateInteger Metodo encargado de validar que un dato sea entero.
      *
-     * @param datum Dato.
+     * @param dato Dato.
      * @throws NumberFormatException
      */
-    public void validateInteger(String datum) throws NumberFormatException {
-        int integerDatum = Integer.parseInt(datum);
+    public void validarInteger(String dato) throws NumberFormatException {
+        int integer = Integer.parseInt(dato);
     }
     
-    public void validateDouble (String datum) throws NumberFormatException {
-        double doubleDatum = Double.parseDouble(datum);
+    public void validarDouble (String dato) throws NumberFormatException {
+        double doubleDato = Double.parseDouble(dato);
     }
 
     /**

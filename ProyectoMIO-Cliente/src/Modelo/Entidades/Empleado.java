@@ -1,4 +1,4 @@
-package Tablas;
+package Modelo.Entidades;
 
 /**
  *
@@ -13,7 +13,7 @@ package Tablas;
 public class Empleado {
     
     private String cedula;
-    private double salario;
+    private Double salario;
     private String nombres;
     private String apellidos;
     private String telefono;
@@ -21,7 +21,7 @@ public class Empleado {
     private String estadoCivil;
     private String cargo;
         
-    public Empleado(String cedula, double salario, String nombre, String apellidos, String telefono, String fechaNacimiento, String estadoCivil, String cargo) {
+    public Empleado(String cedula, double salario, String nombres, String apellidos, String telefono, String fechaNacimiento, String estadoCivil, String cargo) {
         
         this.cedula = cedula;
         this.salario = salario;
@@ -42,11 +42,11 @@ public class Empleado {
         return cedula;
     }
 
-    public void setSalario(double salario) {
+    public void setSalario(Double salario) {
         this.salario = salario;
     }
 
-    public double getSalario() {
+    public Double getSalario() {
         return salario;
     }
 

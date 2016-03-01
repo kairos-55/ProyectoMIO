@@ -33,10 +33,10 @@ public class Fachada {
      */
     public Fachada() {
 
-// PC JESÚS
-      url = "jdbc:postgresql://localhost:5432/mio";
-      user = "jesusaro";
-      password = "jesusaro";
+// PC MARTHA
+      url = "jdbc:postgresql://localhost:5432/basededatos";
+      user = "martha";
+      password = "martha";
 
 
 // JESUSARO UNIVALLE.

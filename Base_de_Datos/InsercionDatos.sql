@@ -10,13 +10,13 @@
 INSERT INTO empleado VALUES 
 ('1000000', 690000, 'MAURICIO BERNARDO', 'DOMINGUEZ BOCANEGRA', '1111111', '31-12-1980', 'VIUDO(A)', 'CONDUCTOR(A)', TRUE);
 INSERT INTO empleado VALUES 
-('1000001', 690000, 'JESÚS ALBERTO', 'RAMÍREZ OTÁLVARO', '2222222', '01-01-1990', 'SOLTERO(A)', 'AUXILIAR', TRUE );
+('1000001', 690000, 'JESUS ALBERTO', 'RAMIREZ OTALVARO', '2222222', '01-01-1990', 'SOLTERO(A)', 'AUXILIAR', TRUE );
 INSERT INTO empleado VALUES 
 ('1000002', 1500000, 'MARTHA CECILIA', 'HOLGUIN TOVAR', '3333333', '01-05-1985', 'CASADO(A)', 'DIRECTOR(A)', TRUE );
 INSERT INTO empleado VALUES 
-('1000003', 690000, 'ALEJANDRO', 'MEJÍA', '4444444', '20-10-1970', 'UNIÓN LIBRE', 'CONDUCTOR', TRUE );
+('1000003', 690000, 'ALEJANDRO', 'MEJIA', '4444444', '20-10-1970', 'UNIÓN LIBRE', 'CONDUCTOR', TRUE );
 INSERT INTO empleado VALUES 
-('1000004', 690000, 'PEPITO', 'PÉREZ', '5555555', '29-02-1988', 'DIVORCIADO(A)', 'CONDUCTOR', TRUE);
+('1000004', 690000, 'PEPITO', 'PEREZ', '5555555', '29-02-1988', 'DIVORCIADO(A)', 'CONDUCTOR', TRUE);
 
 ----------------------------------------------------------------------------------------------------------------------------------
 
@@ -30,33 +30,23 @@ INSERT INTO estacion VALUES (5,'CAPRI', 'CARRERA 102 # 14-02', '1000004', TRUE);
 
 ----------------------------------------------------------------------------------------------------------------------------------
 
---Insertamos datos en la tabla PARADA:
-
-INSERT INTO parada VALUES (6, 1, TRUE);
-INSERT INTO parada VALUES (7, 2, TRUE);
-INSERT INTO parada VALUES (8, 3, TRUE);
-INSERT INTO parada VALUES (9, 4, TRUE);
-INSERT INTO parada VALUES (10, 5, TRUE);
-
-----------------------------------------------------------------------------------------------------------------------------------
-
 --Insertamos datos en la tabla RECORRIDO:
 
-INSERT INTO recorrido VALUES (1, TRUE);
-INSERT INTO recorrido VALUES (2, TRUE);
-INSERT INTO recorrido VALUES (3, TRUE);
-INSERT INTO recorrido VALUES (4, TRUE);
-INSERT INTO recorrido VALUES (5, TRUE);
+INSERT INTO recorrido VALUES (1, 'Norte', TRUE);
+INSERT INTO recorrido VALUES (2, 'Sur', TRUE);
+INSERT INTO recorrido VALUES (3, 'Sur-Oriente', TRUE);
+INSERT INTO recorrido VALUES (4, 'Occidente',TRUE);
+INSERT INTO recorrido VALUES (5, 'NorOccidente',TRUE);
 
 ----------------------------------------------------------------------------------------------------------------------------------
 
---Insertamos datos en la tabla PARADA_RECORRIDO:
+--Insertamos datos en la tabla PARADA:
 
-INSERT INTO parada_recorrido VALUES (1, 6, TRUE);
-INSERT INTO parada_recorrido VALUES (1, 7, TRUE);
-INSERT INTO parada_recorrido VALUES (1, 8, TRUE);
-INSERT INTO parada_recorrido VALUES (2, 9, TRUE);
-INSERT INTO parada_recorrido VALUES (2, 10, TRUE);
+INSERT INTO parada VALUES (1, 1);
+INSERT INTO parada VALUES (1, 2);
+INSERT INTO parada VALUES (2, 1);
+INSERT INTO parada VALUES (2, 3);
+INSERT INTO parada VALUES (3, 5);
 
 ----------------------------------------------------------------------------------------------------------------------------------
 
@@ -72,11 +62,11 @@ INSERT INTO ruta VALUES ('A02', 5, TRUE);
 
 --Insertamos datos en la tabla TARJETA:
 
-INSERT INTO tarjeta VALUES (1, 0, 1, '1000000', 'ACTIVA');
-INSERT INTO tarjeta VALUES (2, 1700, 2, '1000001', 'ACTIVA');
-INSERT INTO tarjeta VALUES (3, 3000, 1, '1000000', 'INACTIVA');
-INSERT INTO tarjeta VALUES (4, 10000, 2, '1000001', 'ELIMINADA');
-INSERT INTO tarjeta VALUES (5, 30000, 1, '1000000', 'INACTIVA');
+INSERT INTO tarjeta VALUES (1, 0, '1000000', '01-02-2016', '09:00', 'ACTIVA');
+INSERT INTO tarjeta VALUES (2, 1700, '1000001', '02-02-2016', '14:00', 'ACTIVA');
+INSERT INTO tarjeta VALUES (3, 3000, '1000000', '01-02-2016', '22:00', 'INACTIVA');
+INSERT INTO tarjeta VALUES (4, 10000, '1000001', '02-02-2016', '05:00', 'ELIMINADA');
+INSERT INTO tarjeta VALUES (5, 30000, '1000000', '01-02-2016', '12:00', 'INACTIVA');
 
 ----------------------------------------------------------------------------------------------------------------------------------
 
@@ -112,16 +102,16 @@ INSERT INTO tarjeta_bus VALUES (2, '2000DE', '01-01-2016', '20:00');
 
 --Insertamos datos en la tabla PQRS:
 
-INSERT INTO pqrs (cedula_empleado, id_estacion, fecha, motivo, cedula_usuario, descripcion, estado_pqrs) VALUES 
-('1000001', 1, '01-01-2016', 'AGRESIÓN', '1000000', 'N/A', 'INICIADO');
-INSERT INTO pqrs (cedula_empleado, id_estacion, fecha, motivo, cedula_usuario, descripcion, estado_pqrs) VALUES 
-('1000002', 2, '02-01-2016', 'SUGERENCIA', '2000000', 'N/A', 'EN PROCESO');
-INSERT INTO pqrs (cedula_empleado, id_estacion, fecha, motivo, cedula_usuario, descripcion, estado_pqrs) VALUES 
-('1000003', 3, '03-01-2016', 'RECLAMO', '3000000', 'N/A', 'SOLUCIONADO');
-INSERT INTO pqrs (cedula_empleado, id_estacion, fecha, motivo, cedula_usuario, descripcion, estado_pqrs) VALUES 
-('1000004', 4, '04-01-2016', 'INCONVENIENTE', '4000000', 'N/A', 'ELIMINADA');
-INSERT INTO pqrs (cedula_empleado, id_estacion, fecha, motivo, cedula_usuario, descripcion, estado_pqrs) VALUES 
-('1000000', 5, '05-01-2016', 'PETICIÓN', '5000000', 'N/A', 'EN PROCESO');
+INSERT INTO pqrs (id_estacion, fecha, motivo, cedula_usuario, descripcion, estado_pqrs) VALUES 
+(1, '01-01-2016', 'AGRESIÓN', '1000000', 'N/A', 'INICIADO');
+INSERT INTO pqrs (id_estacion, fecha, motivo, cedula_usuario, descripcion, estado_pqrs) VALUES 
+(2, '02-01-2016', 'SUGERENCIA', '2000000', 'N/A', 'EN PROCESO');
+INSERT INTO pqrs (id_estacion, fecha, motivo, cedula_usuario, descripcion, estado_pqrs) VALUES 
+(3, '03-01-2016', 'RECLAMO', '3000000', 'N/A', 'SOLUCIONADO');
+INSERT INTO pqrs (id_estacion, fecha, motivo, cedula_usuario, descripcion, estado_pqrs) VALUES 
+(4, '04-01-2016', 'INCONVENIENTE', '4000000', 'N/A', 'ELIMINADA');
+INSERT INTO pqrs (id_estacion, fecha, motivo, cedula_usuario, descripcion, estado_pqrs) VALUES 
+(5, '05-01-2016', 'PETICIÓN', '5000000', 'N/A', 'EN PROCESO');
 
 ----------------------------------------------------------------------------------------------------------------------------------
 
@@ -136,13 +126,23 @@ INSERT INTO turno VALUES (6, '20:00', '23:00', TRUE);
 
 ----------------------------------------------------------------------------------------------------------------------------------
 
---Insertamos datos en la tabla ASIGNACION_BUS:
+--Insertamos datos en la tabla EMPLEADO_ESTACION:
 
-INSERT INTO asignacion_bus VALUES ('1000000', '1000AC', '01-02-2016', 1, TRUE);
-INSERT INTO asignacion_bus VALUES ('1000003', '2000DE', '02-02-2016', 2, TRUE);
-INSERT INTO asignacion_bus VALUES ('1000004', '3000EF', '03-02-2016', 3, TRUE);
-INSERT INTO asignacion_bus VALUES ('1000000', '4000GH', '01-02-2016', 4, TRUE);
-INSERT INTO asignacion_bus VALUES ('1000003', '5000IJ', '02-02-2016', 5, TRUE);
+INSERT INTO empleado_estacion VALUES ('1000000', 1, '01-02-2016', 1, TRUE);
+INSERT INTO empleado_estacion VALUES ('1000003', 2, '02-02-2016', 2, TRUE);
+INSERT INTO empleado_estacion VALUES ('1000004', 1, '03-02-2016', 3, TRUE);
+INSERT INTO empleado_estacion VALUES ('1000000', 3, '01-02-2016', 4, TRUE);
+INSERT INTO empleado_estacion VALUES ('1000003', 2, '02-02-2016', 5, TRUE);
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+--Insertamos datos en la tabla	EMPLEADO_BUS:
+
+INSERT INTO empleado_bus VALUES ('1000000', '1000AC', '01-02-2016', 1, TRUE);
+INSERT INTO empleado_bus VALUES ('1000003', '2000DE', '02-02-2016', 2, TRUE);
+INSERT INTO empleado_bus VALUES ('1000004', '3000EF', '03-02-2016', 3, TRUE);
+INSERT INTO empleado_bus VALUES ('1000000', '4000GH', '01-02-2016', 4, TRUE);
+INSERT INTO empleado_bus VALUES ('1000003', '5000IJ', '02-02-2016', 5, TRUE);
 
 ----------------------------------------------------------------------------------------------------------------------------------
 

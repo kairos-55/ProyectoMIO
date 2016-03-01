@@ -2,6 +2,10 @@ package GUI.PaquetePrincipal;
 
 import Modelo.Validadores.LanzarMensaje;
 import Modelo.Excepciones.MiExcepcion;
+import GUI.Fondo.JPFondo;
+import GUI.FechaSistema.JPFechaSistema;
+import GUI.GestionInformacion.Empleado.JIFEmpleado;
+import GUI.GestionInformacion.Estacion.JIFEstacion;
 /*import Control.EmployeeControl;
 import Control.OfficeControl;
 import Control.UseraccountControl;
@@ -88,15 +92,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jSFile01 = new javax.swing.JPopupMenu.Separator();
         jMIFileClose = new javax.swing.JMenuItem();
         jMParametrization = new javax.swing.JMenu();
-        jMIParametrizationUsers = new javax.swing.JMenuItem();
-        jMIParametrizationEmployees = new javax.swing.JMenuItem();
-        jMIParametrizationOffices = new javax.swing.JMenuItem();
+        jMIGestionInformacionEmpleados = new javax.swing.JMenuItem();
+        jMIGestionInformacionEstacion = new javax.swing.JMenuItem();
         jSParametrization01 = new javax.swing.JPopupMenu.Separator();
         jMParametrizationPayroll = new javax.swing.JMenu();
         jMIPayrollConcepts = new javax.swing.JMenuItem();
-        jMPayroll = new javax.swing.JMenu();
-        jMIDefiningPeriod = new javax.swing.JMenuItem();
-        jMIPayrollLiquidate = new javax.swing.JMenuItem();
         jMReports = new javax.swing.JMenu();
         jMListings = new javax.swing.JMenu();
         jMIReportsUsers = new javax.swing.JMenuItem();
@@ -146,31 +146,23 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jMBMenu.add(jMFile);
 
-        jMParametrization.setText("PARAMETRIZACIÓN");
+        jMParametrization.setText("GESTIÓN INFORMACIÓN");
 
-        jMIParametrizationUsers.setText("Usuarios");
-        jMIParametrizationUsers.addActionListener(new java.awt.event.ActionListener() {
+        jMIGestionInformacionEmpleados.setText("Empleados");
+        jMIGestionInformacionEmpleados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMIParametrizationUsersActionPerformed(evt);
+                jMIGestionInformacionEmpleadosActionPerformed(evt);
             }
         });
-        jMParametrization.add(jMIParametrizationUsers);
+        jMParametrization.add(jMIGestionInformacionEmpleados);
 
-        jMIParametrizationEmployees.setText("Empleados");
-        jMIParametrizationEmployees.addActionListener(new java.awt.event.ActionListener() {
+        jMIGestionInformacionEstacion.setText("Estaciones");
+        jMIGestionInformacionEstacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMIParametrizationEmployeesActionPerformed(evt);
+                jMIGestionInformacionEstacionActionPerformed(evt);
             }
         });
-        jMParametrization.add(jMIParametrizationEmployees);
-
-        jMIParametrizationOffices.setText("Sedes");
-        jMIParametrizationOffices.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMIParametrizationOfficesActionPerformed(evt);
-            }
-        });
-        jMParametrization.add(jMIParametrizationOffices);
+        jMParametrization.add(jMIGestionInformacionEstacion);
         jMParametrization.add(jSParametrization01);
 
         jMParametrizationPayroll.setText("Nómina");
@@ -186,26 +178,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMParametrization.add(jMParametrizationPayroll);
 
         jMBMenu.add(jMParametrization);
-
-        jMPayroll.setText("NÓMINA");
-
-        jMIDefiningPeriod.setText("Definir Periodo");
-        jMIDefiningPeriod.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMIDefiningPeriodActionPerformed(evt);
-            }
-        });
-        jMPayroll.add(jMIDefiningPeriod);
-
-        jMIPayrollLiquidate.setText("Liquidar Nomina");
-        jMIPayrollLiquidate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMIPayrollLiquidateActionPerformed(evt);
-            }
-        });
-        jMPayroll.add(jMIPayrollLiquidate);
-
-        jMBMenu.add(jMPayroll);
 
         jMReports.setText("INFORMES");
 
@@ -327,18 +299,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }*/
     }//GEN-LAST:event_jMIFileLogoutActionPerformed
 
-    private void jMIParametrizationOfficesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIParametrizationOfficesActionPerformed
-        /*JIFOffices internalFrame = new JIFOffices("Parametrización de Sedes", (int) getSize().width, (int)  getSize().height);
-        background.add(internalFrame);
-        internalFrame.setVisible(true);*/
-    }//GEN-LAST:event_jMIParametrizationOfficesActionPerformed
-
-    private void jMIParametrizationUsersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIParametrizationUsersActionPerformed
-        /*JIFUser internalFrame = new JIFUser("Parametrización de usuarios", (int) getSize().width, (int) getSize().height);
-        background.add(internalFrame);
-        internalFrame.setVisible(true);*/
-    }//GEN-LAST:event_jMIParametrizationUsersActionPerformed
-
     private void jMIFileViewProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIFileViewProfileActionPerformed
         // Actualizamos primero la información base de la sesión.
         /*String username = jPLoginPanel.getUsername();
@@ -407,33 +367,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }*/
     }//GEN-LAST:event_jMIReportsOfficesActionPerformed
 
-    private void jMIDefiningPeriodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIDefiningPeriodActionPerformed
-        /*String title = "Definir Periodos de Pago";
-        try {
-            JIFPayrollPeriod internalFrame = new JIFPayrollPeriod(title, (int) getSize().width, (int) getSize().height);
-            background.add(internalFrame);
-            internalFrame.setVisible(true);
-        } catch (MyException ex) {
-            throwerM.displayMessageDialog(ex.getMessage(), title, JOptionPane.ERROR_MESSAGE);
-        }*/
-    }//GEN-LAST:event_jMIDefiningPeriodActionPerformed
-
-    private void jMIPayrollLiquidateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIPayrollLiquidateActionPerformed
-        /*String title = "Liquidar Nomina.";
-        try {
-            JIFLiquidatePayroll internalFrame = new JIFLiquidatePayroll(title, (int) getSize().width, (int) getSize().height);
-            background.add(internalFrame);
-            internalFrame.setVisible(true);
-        } catch (MyException ex) {
-            throwerM.displayMessageDialog(ex.getMessage(), title, JOptionPane.ERROR_MESSAGE);
-        }*/
-    }//GEN-LAST:event_jMIPayrollLiquidateActionPerformed
-
-    private void jMIParametrizationEmployeesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIParametrizationEmployeesActionPerformed
-        /*JIFEmployee internalFrame = new JIFEmployee("Parametrización de Empleados", (int) getSize().width, (int) getSize().height);
-        background.add(internalFrame);
-        internalFrame.setVisible(true);*/
-    }//GEN-LAST:event_jMIParametrizationEmployeesActionPerformed
+    private void jMIGestionInformacionEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIGestionInformacionEmpleadosActionPerformed
+        JIFEmpleado internalFrame = new JIFEmpleado("Gestión de Empleados", (int) getSize().width, (int) getSize().height);
+        fondo.add(internalFrame);
+        internalFrame.setVisible(true);
+    }//GEN-LAST:event_jMIGestionInformacionEmpleadosActionPerformed
 
     private void aJMIReportsEmployee_OfficeListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aJMIReportsEmployee_OfficeListActionPerformed
         /*String title = "Lista de Empleados por Sede";
@@ -500,6 +438,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             throwerM.displayMessageDialog(ex.getMessage(), title, JOptionPane.ERROR_MESSAGE);
         }*/
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMIGestionInformacionEstacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIGestionInformacionEstacionActionPerformed
+        JIFEstacion internalFrame = new JIFEstacion("Nueva Estación", (int) getSize().width, (int) getSize().height);
+        fondo.add(internalFrame);
+        internalFrame.setVisible(true);
+    }//GEN-LAST:event_jMIGestionInformacionEstacionActionPerformed
    
     /**
      * setAppearance Metodo encargado de poner el Look And Feel del Frame.
@@ -521,15 +465,18 @@ public class VentanaPrincipal extends javax.swing.JFrame {
      * initializeComponents.
      */
     private void initializeComponents() {
-        /*// LANZADOR DE MENSAJES.
+        // LANZADOR DE MENSAJES.
         throwerM = new LanzarMensaje(this);
-        // BACKGROUND DE LA APLICACIÓN.
-        background = new JPBackground("src/GUI/Background/background_red.jpg");
-        // PANEL DE FECHA DEL SISTEMA.
-        jPSystemDate = new JPSystemDate();
+        /*
         // PANEL DE ACCESO AL SISTEMA.
         // A este punto se gestiona la preparación del primer uso de la aplicación.
         jPLoginPanel = new JPLogin ("Acceso al sistema.", this);*/
+        
+        // FONDO DE LA APLICACIÓN.
+        fondo = new JPFondo("src/GUI/Fondo/background_blue.jpg");
+        
+        // PANEL DE FECHA DEL SISTEMA
+        jPFechaSistema = new JPFechaSistema();
     }
 
     /**
@@ -539,19 +486,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         // CONTAINER.
         container = getContentPane();
         container.setLayout(new GridLayout(1, 1));
-        //container.add(background);
+        container.add(fondo);
         // PANEL DE FECHA DEL SISTEMA.
         JPanel jPSeparatorSD = new JPanel();
         jPSeparatorSD.setLayout(new BorderLayout());        
         jPSeparatorSD.setBackground(new Color(0, 0, 0, 60));        
-        //jPSeparatorSD.add(jPSystemDate, "North");
-        //background.add(jPSeparatorSD, "East");
+        jPSeparatorSD.add(jPFechaSistema, "North");
+        fondo.add(jPSeparatorSD, "East");
         // DISEÑO DEL PANEL DE ACCESO.        
         JPanel jPSeparatorBody = new JPanel();
         jPSeparatorBody.setLayout(new BorderLayout());
         jPSeparatorBody.setOpaque(false);
         jPSeparatorBody.add(new JSeparator(SwingConstants.VERTICAL), "After");
-        //background.add(jPSeparatorBody, "Center");        
+        fondo.add(jPSeparatorBody, "Center");        
         JPanel jPSeparatorLogin = new JPanel();
         //separator.setOpaque(false); Panel totalmente transparente.
         jPSeparatorLogin.setBackground(new Color(0,0,0,60));
@@ -560,7 +507,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPSeparatorBody.add(jPSeparatorLogin, "North");    
         // PREPARAMOS LAS OPCIONES DE MENÚ HABILITADAS        
         // Damos los permisos iniciales.
-        initialPermissions();
+        //initialPermissions();
+        //initialPermissions();
+        rootPermissions();
     }    
     // METODOS PARA LA GESTIÓN DE PERMISOS
     /**
@@ -578,8 +527,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMBMenu.removeAll();
         setEnabledMenuItems(true);
         jMBMenu.add(jMFile);
-        jMBMenu.add(jMParametrization);
-        jMBMenu.add(jMPayroll);
+        jMBMenu.add(jMParametrization);        
         jMBMenu.add(jMReports);
         jMBMenu.add(jMHelp);          
     }
@@ -588,7 +536,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMBMenu.removeAll();
         setEnabledMenuItems(true);
         jMBMenu.add(jMFile);        
-        jMBMenu.add(jMPayroll);
         jMBMenu.add(jMReports);
         jMIReportsUsers.setEnabled(false);
         jMBMenu.add(jMHelp); 
@@ -616,15 +563,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     
     public void setEnabledMenuItems(boolean bool) {
         jMIAbout.setEnabled(bool);
-        jMIDefiningPeriod.setEnabled(bool);
         jMIFileClose.setEnabled(bool);
         jMIFileLogout.setEnabled(bool);
         jMIFileViewProfile.setEnabled(bool);
-        jMIParametrizationOffices.setEnabled(bool);
-        jMIParametrizationEmployees.setEnabled(bool);
-        jMIParametrizationUsers.setEnabled(bool);
+        jMIGestionInformacionEstacion.setEnabled(bool);
+        jMIGestionInformacionEmpleados.setEnabled(bool);
         jMIPayrollConcepts.setEnabled(bool);
-        jMIPayrollLiquidate.setEnabled(bool);
         jMIReportsEmployees.setEnabled(bool);
         jMIReportsOffices.setEnabled(bool);
         jMIReportsUsers.setEnabled(bool);
@@ -638,17 +582,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMGraphics;
     private javax.swing.JMenu jMHelp;
     private javax.swing.JMenuItem jMIAbout;
-    private javax.swing.JMenuItem jMIDefiningPeriod;
     private javax.swing.JMenuItem jMIFileClose;
     private javax.swing.JMenuItem jMIFileLogout;
     private javax.swing.JMenuItem jMIFileViewProfile;
-    private javax.swing.JMenuItem jMIParametrizationEmployees;
-    private javax.swing.JMenuItem jMIParametrizationOffices;
-    private javax.swing.JMenuItem jMIParametrizationUsers;
+    private javax.swing.JMenuItem jMIGestionInformacionEmpleados;
+    private javax.swing.JMenuItem jMIGestionInformacionEstacion;
     private javax.swing.JMenuItem jMIPaymentReceipt;
     private javax.swing.JMenuItem jMIPayroll;
     private javax.swing.JMenuItem jMIPayrollConcepts;
-    private javax.swing.JMenuItem jMIPayrollLiquidate;
     private javax.swing.JMenu jMIPayrollReports;
     private javax.swing.JMenuItem jMIReportsEmployees;
     private javax.swing.JMenuItem jMIReportsOffices;
@@ -656,7 +597,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMListings;
     private javax.swing.JMenu jMParametrization;
     private javax.swing.JMenu jMParametrizationPayroll;
-    private javax.swing.JMenu jMPayroll;
     private javax.swing.JMenu jMReports;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPopupMenu.Separator jSFile01;
@@ -667,10 +607,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     // ATRIBUTOS PRIVADOS DE LA CLASE.
     private Container container;
     private LanzarMensaje throwerM;
-    // BACKGROUND.
-    //private JPBackground background;
+    
     // ACCESO AL SISTEMA.
     //private JPLogin jPLoginPanel; 
     // FECHA DEL SISTEMA.
-    //private JPSystemDate jPSystemDate;
+    private JPFechaSistema jPFechaSistema;
+    
+    // FONDO.
+    private JPFondo fondo;
 }

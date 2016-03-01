@@ -12,11 +12,13 @@ package Modelo.Entidades;
 
 public class Recorrido {
     
-    private int id;    
+    private int id; 
+    private String nombre;
     
-    public Recorrido(int id){
+    public Recorrido(int id, String nombre){
         
         this.id = id;
+        this.nombre = nombre;
         
     }
 
@@ -26,6 +28,14 @@ public class Recorrido {
 
     public int getId() {
         return id;
-    }   
+    }  
+    
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    
+    public String getNombre() {
+        return nombre;
+    }
     
 }

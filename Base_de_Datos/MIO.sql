@@ -38,25 +38,9 @@ CREATE TABLE estacion
 
 	CONSTRAINT estacion_pk PRIMARY KEY (id_estacion),
         
-        CONSTRAINT estacion_fk1 FOREIGN KEY (cedula_empleado) 
+        CONSTRAINT estacion_fk FOREIGN KEY (cedula_empleado) 
 	REFERENCES empleado (cedula_empleado)
 	
-);
-
-----------------------------------------------------------------------
-
-DROP TABLE IF EXISTS parada CASCADE;
-
-CREATE TABLE parada
-(
-	id_parada INTEGER NOT NULL,
-	id_estacion INTEGER NOT NULL,
-	estado_parada BOOLEAN NOT NULL,
-
-	CONSTRAINT parada_pk PRIMARY KEY (id_parada),
-
-	CONSTRAINT parada_fk FOREIGN KEY (id_estacion)
-	REFERENCES estacion (id_estacion)
 );
 
 ----------------------------------------------------------------------
@@ -66,6 +50,7 @@ DROP TABLE IF EXISTS recorrido CASCADE;
 CREATE TABLE recorrido
 (
 	id_recorrido INTEGER NOT NULL,
+	nombre VARCHAR(20) NOT NULL,
 	estado_recorrido BOOLEAN NOT NULL,
 
 	CONSTRAINT recorrido_pk PRIMARY KEY (id_recorrido)
@@ -73,22 +58,21 @@ CREATE TABLE recorrido
 
 ----------------------------------------------------------------------
 
-DROP TABLE IF EXISTS parada_recorrido CASCADE;
+DROP TABLE IF EXISTS parada CASCADE;
 
-CREATE TABLE parada_recorrido
+CREATE TABLE parada
 (
 
 	id_recorrido INTEGER NOT NULL,
-	id_parada INTEGER NOT NULL,
-	estado_parada_recorrido BOOLEAN NOT NULL,
-        
-	CONSTRAINT parada_recorrido_pk PRIMARY KEY (id_recorrido, id_parada),
+	id_estacion INTEGER NOT NULL,
+	
+	CONSTRAINT parada_pk PRIMARY KEY (id_recorrido, id_estacion),
 
-	CONSTRAINT parada_recorrido_fk1 FOREIGN KEY (id_recorrido)
+	CONSTRAINT parada_fk1 FOREIGN KEY (id_recorrido)
 	REFERENCES recorrido (id_recorrido),
 
-	CONSTRAINT parada_recorrido_fk2 FOREIGN KEY (id_parada)
-	REFERENCES parada (id_parada)
+	CONSTRAINT parada_fk2 FOREIGN KEY (id_estacion)
+	REFERENCES estacion (id_estacion)
 );
 
 ----------------------------------------------------------------------
@@ -115,16 +99,14 @@ CREATE TABLE tarjeta
 (
 	id_tarjeta INTEGER NOT NULL,
 	saldo DOUBLE PRECISION NOT NULL,	
-	punto_venta INTEGER NOT NULL,
-	empleado_vendedor VARCHAR(20) NOT NULL,
+	cedula_empleado VARCHAR(20) NOT NULL,
+	fecha_venta DATE NOT NULL,
+	hora_venta VARCHAR(5) NOT NULL,
 	estado_tarjeta VARCHAR(20) NOT NULL,
 
 	CONSTRAINT tarjeta_pk PRIMARY KEY (id_tarjeta),
 
-	CONSTRAINT tarjeta_fk1 FOREIGN KEY (punto_venta) 
-	REFERENCES estacion (id_estacion),
-
-	CONSTRAINT tarjeta_fk2 FOREIGN KEY (empleado_vendedor) 
+	CONSTRAINT tarjeta_fk FOREIGN KEY (cedula_empleado) 
 	REFERENCES empleado (cedula_empleado)
 );
 
@@ -169,15 +151,15 @@ DROP TABLE IF EXISTS tarjeta_bus CASCADE;
 
 CREATE TABLE tarjeta_bus
 (
-	id_Tarjeta INTEGER NOT NULL,
+	id_tarjeta INTEGER NOT NULL,
 	placa_bus VARCHAR(20) NOT NULL,
 	fecha DATE NOT NULL,
 	hora VARCHAR(5) NOT NULL,
 
-	CONSTRAINT tarjeta_bus_pk PRIMARY KEY (id_Tarjeta, placa_bus, fecha, hora),
+	CONSTRAINT tarjeta_bus_pk PRIMARY KEY (id_tarjeta, placa_bus, fecha, hora),
 
-	CONSTRAINT tarjeta_bus_fk1 FOREIGN KEY (id_Tarjeta)
-	REFERENCES tarjeta (id_Tarjeta),
+	CONSTRAINT tarjeta_bus_fk1 FOREIGN KEY (id_tarjeta)
+	REFERENCES tarjeta (id_tarjeta),
 
 	CONSTRAINT tarjeta_bus_fk2 FOREIGN KEY (placa_bus)
 	REFERENCES bus (placa_bus)
@@ -188,7 +170,6 @@ DROP TABLE IF EXISTS pqrs CASCADE;
 CREATE TABLE pqrs
 (
 	id_pqrs INTEGER NOT NULL,
-	cedula_empleado VARCHAR(20) NOT NULL,
 	id_estacion INTEGER NOT NULL,	
 	fecha DATE NOT NULL,
 	motivo VARCHAR(100) NOT NULL,
@@ -198,13 +179,10 @@ CREATE TABLE pqrs
 
 	CONSTRAINT pqrs_pk PRIMARY KEY (id_pqrs, cedula_usuario),
 
-	CONSTRAINT pqrs_fk1 FOREIGN KEY (cedula_empleado)
-	REFERENCES empleado (cedula_empleado),
-
-	CONSTRAINT pqrs_fk2 FOREIGN KEY (id_estacion)
+	CONSTRAINT pqrs_fk1 FOREIGN KEY (id_estacion)
 	REFERENCES estacion (id_estacion),
 
-	CONSTRAINT pqrs_fk3 FOREIGN KEY (cedula_usuario)
+	CONSTRAINT pqrs_fk2 FOREIGN KEY (cedula_usuario)
 	REFERENCES usuario (cedula_usuario)
 );
 
@@ -235,25 +213,49 @@ CREATE TABLE turno
 
 ----------------------------------------------------------------------
 
-DROP TABLE IF EXISTS asignacion_bus CASCADE;
+DROP TABLE IF EXISTS empleado_estacion CASCADE;
 
-CREATE TABLE asignacion_bus
+CREATE TABLE empleado_estacion
+(
+	cedula_empleado VARCHAR(20) NOT NULL,
+	id_estacion INTEGER NOT NULL,
+	fecha DATE NOT NULL,
+	id_turno INTEGER NOT NULL,
+	estado_empleado_estacion BOOLEAN NOT NULL,
+
+	CONSTRAINT empleado_estacion_pk PRIMARY KEY (cedula_empleado, id_estacion, fecha, id_turno),
+
+	CONSTRAINT empleado_estacion_fk1 FOREIGN KEY (cedula_empleado)
+	REFERENCES empleado (cedula_empleado),
+
+	CONSTRAINT empleado_estacion_fk2 FOREIGN KEY (id_estacion)
+	REFERENCES estacion (id_estacion),
+
+	CONSTRAINT empleado_estacion_fk3 FOREIGN KEY (id_turno)
+	REFERENCES turno (id_turno)
+);
+
+----------------------------------------------------------------------
+
+DROP TABLE IF EXISTS empleado_bus CASCADE;
+
+CREATE TABLE empleado_bus
 (
 	cedula_empleado VARCHAR(20) NOT NULL,
 	placa_bus VARCHAR(20) NOT NULL,	
 	fecha DATE NOT NULL,
 	id_turno INTEGER NOT NULL,
-	estado_asignacion_bus BOOLEAN NOT NULL,
+	estado_empleado_bus BOOLEAN NOT NULL,
 
-	CONSTRAINT asignacion_bus_pk PRIMARY KEY (cedula_empleado, placa_bus, fecha, id_turno),
+	CONSTRAINT empleado_bus_pk PRIMARY KEY (cedula_empleado, placa_bus, fecha, id_turno),
 
-	CONSTRAINT asignacion_bus_fk1 FOREIGN KEY (cedula_empleado)
+	CONSTRAINT empleado_bus_fk1 FOREIGN KEY (cedula_empleado)
 	REFERENCES empleado (cedula_empleado),
 
-	CONSTRAINT asignacion_bus_fk2 FOREIGN KEY (placa_bus)
+	CONSTRAINT empleado_bus_fk2 FOREIGN KEY (placa_bus)
 	REFERENCES bus (placa_bus),
 
-	CONSTRAINT asignacion_bus_fk3 FOREIGN KEY (id_turno)
+	CONSTRAINT empleado_bus_fk3 FOREIGN KEY (id_turno)
 	REFERENCES turno (id_turno)
 );
 
