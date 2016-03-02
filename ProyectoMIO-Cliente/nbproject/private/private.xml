@@ -4,13 +4,10 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Usuario/Desktop/ProyectoMIO/ProyectoMIO-Cliente/src/Main/MainCliente.java</file>
-            <file>file:/C:/Users/Usuario/Desktop/ProyectoMIO/ProyectoMIO-Cliente/src/Modelo/Validadores/Validador.java</file>
-            <file>file:/C:/Users/Usuario/Desktop/ProyectoMIO/ProyectoMIO-Cliente/src/Control/ControlEmpleado.java</file>
             <file>file:/C:/Users/Usuario/Desktop/ProyectoMIO/ProyectoMIO-Cliente/src/GUI/GestionInformacion/Estacion/JIFCrearEstacion.java</file>
             <file>file:/C:/Users/Usuario/Desktop/ProyectoMIO/ProyectoMIO-Cliente/src/Control/ControlEstacion.java</file>
             <file>file:/C:/Users/Usuario/Desktop/ProyectoMIO/ProyectoMIO-Cliente/src/GUI/PaquetePrincipal/VentanaPrincipal.java</file>
             <file>file:/C:/Users/Usuario/Desktop/ProyectoMIO/ProyectoMIO-Cliente/src/GUI/GestionInformacion/Estacion/JIFBuscarEstacion.java</file>
-            <file>file:/C:/Users/Usuario/Desktop/ProyectoMIO/ProyectoMIO-Cliente/src/AdministradorConexion/ManejadorErrores.java</file>
         </group>
     </open-files>
 </project-private>

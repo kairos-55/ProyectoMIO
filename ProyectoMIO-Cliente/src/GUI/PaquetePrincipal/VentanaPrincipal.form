@@ -72,23 +72,13 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMICrearEstacionActionPerformed"/>
                   </Events>
                 </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMIBuscarEstacion">
+                <MenuItem class="javax.swing.JMenuItem" name="jMIBMEEstacion">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Buscar"/>
+                    <Property name="text" type="java.lang.String" value="Buscar, Modificar y Eliminar"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMIBuscarEstacionActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMIBMEEstacionActionPerformed"/>
                   </Events>
-                </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMIModificarEstacion">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Modificar"/>
-                  </Properties>
-                </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMIEliminarEstacion">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Eliminar"/>
-                  </Properties>
                 </MenuItem>
               </SubComponents>
             </Menu>

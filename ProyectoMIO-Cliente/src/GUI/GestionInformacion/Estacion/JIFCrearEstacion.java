@@ -140,8 +140,10 @@ public class JIFCrearEstacion extends AnclarVentanaInterna {
     /**
      * cleanGeneralDataForm.
      */
-    private void cleanGeneralDataForm() {
+    private void limpiarCampos() {
+                
         jTFCodigoEstacion.setText("");
+        jTFNombreEstacion.setText("");
         jTFDireccionEstacion.setText("");
         jCBCedulaDirector.setSelectedIndex(0);
         
@@ -248,6 +250,8 @@ public class JIFCrearEstacion extends AnclarVentanaInterna {
             controlEstacion.crearEstacion(informacion);
             
             lanzarMensaje.mostrarMessageDialog("La estación fue creada con éxito.", title, JOptionPane.INFORMATION_MESSAGE); 
+            
+            limpiarCampos();
             
         } catch (MiExcepcion ex) {
             

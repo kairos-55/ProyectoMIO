@@ -123,6 +123,7 @@ public class JIFBuscarEstacion extends AnclarVentanaInterna {
         getContentPane().add(jPInformacion, java.awt.BorderLayout.NORTH);
 
         jPBotonBuscar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPBotonBuscar.setMaximumSize(new java.awt.Dimension(610, 37));
 
         jBBuscarEstacion.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jBBuscarEstacion.setText("BUSCAR ESTACIÓN");
@@ -152,7 +153,7 @@ public class JIFBuscarEstacion extends AnclarVentanaInterna {
 
     private void jTFCodigoEstacionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTFCodigoEstacionFocusLost
                     
-            if(jTFCodigoEstacion.getText()!=""){
+            /*if(jTFCodigoEstacion.getText()!=""){
                 
             String cod = jTFCodigoEstacion.getText();
             
@@ -193,7 +194,7 @@ public class JIFBuscarEstacion extends AnclarVentanaInterna {
                 
             }else{
                 jCBCodigoEstacion.setSelectedIndex(0);
-            }
+            }*/
         
     }//GEN-LAST:event_jTFCodigoEstacionFocusLost
 
@@ -224,12 +225,14 @@ public class JIFBuscarEstacion extends AnclarVentanaInterna {
     }
     
     private void displayTab() throws MiExcepcion {
-        // Bloqueamos el boton Editar
-        //jBEditPassword.setEnabled(false);
+        // Bloqueamos el boton Buscar
+        jBBuscarEstacion.setEnabled(false);
+        jTFCodigoEstacion.setEditable(false);
+        jCBCodigoEstacion.setEnabled(false);
         // Desbloqueamos el Internal Frame     
         setLocked(false);
         // Definimos un nuevo tamaño.
-        setSize(WIDTH_, 240);
+        setSize(WIDTH_, 440);
         // Definimos el layot del panel...  
         jPUpdatePassword = new JPanel();
         jPUpdatePassword.setLayout(new BorderLayout());
@@ -257,6 +260,20 @@ public class JIFBuscarEstacion extends AnclarVentanaInterna {
         jPUpdateTF.add(jTFDireccion);
         jPUpdateTF.add(jTFCedulaDirector);
         
+        JPanel jPBotonesModificar = new JPanel();
+        jPBotonesModificar.setLayout(new FlowLayout());
+        jPBotonesModificar.setBorder(new EtchedBorder());
+        
+        jBGuardarModificaciones = new JButton("GUARDAR MODIFICACIÓN");
+        jBGuardarModificaciones.addActionListener(manejadorEventos);
+        
+        jBCancelar = new JButton("CANCELAR");
+        jBCancelar.addActionListener(manejadorEventos);
+        
+        jPBotonesModificar.add(jBGuardarModificaciones);
+        jPBotonesModificar.add(jBCancelar);
+        
+        
         String codigo = jTFCodigoEstacion.getText().trim();
         
         Estacion estacion = controlEstacion.buscarEstacion(codigo);
@@ -273,19 +290,28 @@ public class JIFBuscarEstacion extends AnclarVentanaInterna {
         JPanel jPUpdateButtons = new JPanel();
         //jPUpdateButtons.setLayout(new GridLayout(1, 2));
         jPUpdateButtons.setLayout(new FlowLayout());
-        jPUpdateButtons.setBorder(new EtchedBorder());
+        //jPUpdateButtons.setBorder(new EtchedBorder());
         // Creamos los botones.
-        jBSave = new JButton("SALVAR");
-        //jBSave.addActionListener(eventManager);
-        jBCancel = new JButton("CANCEL");
-        //jBCancel.addActionListener(eventManager);
+        jBModificar = new JButton("MODIFICAR");
+        jBModificar.addActionListener(manejadorEventos);
+        
+        jBEliminar = new JButton("ELIMINAR");
+        jBEliminar.addActionListener(manejadorEventos);
+        
+        jBBuscar = new JButton("BUSCAR DE NUEVO");
+        jBBuscar.addActionListener(manejadorEventos);
+        
         // Procedemos a agregar los botones al panel
-        jPUpdateButtons.add(jBSave);
-        jPUpdateButtons.add(jBCancel);
+        jPUpdateButtons.add(jBModificar);
+        jPUpdateButtons.add(jBEliminar);
+        jPUpdateButtons.add(jBBuscar);
+        
+        jPBotonesModificar.add(jPUpdateButtons);
         // Procedemos a armar el panel completo.
         jPUpdatePassword.add(jPUpdateLabels, "Before");
         jPUpdatePassword.add(jPUpdateTF, "Center");
-        jPUpdatePassword.add(jPUpdateButtons, "Last");
+        jPUpdatePassword.add(jPBotonesModificar, "Last");
+        //jPUpdatePassword.add(jPUpdateButtons, "Last");
         // Agregamos el panel ala ventana principal
         this.add(jPUpdatePassword, "South");
         // Bloqueamos de nuevo el internal frame.
@@ -325,8 +351,11 @@ public class JIFBuscarEstacion extends AnclarVentanaInterna {
     // End of variables declaration//GEN-END:variables
     private final int parentWidth;
     private final int parentHeight;
-    private JButton jBSave;
-    private JButton jBCancel;
+    private JButton jBModificar;
+    private JButton jBEliminar;
+    private JButton jBBuscar;
+    private JButton jBGuardarModificaciones;
+    private JButton jBCancelar;
     private JTextField jTFNombre;
     private JTextField jTFDireccion;
     private JTextField jTFCedulaDirector;
@@ -372,6 +401,55 @@ public class JIFBuscarEstacion extends AnclarVentanaInterna {
                 } catch (Exception ex){
                     jTFCodigoEstacion.setText("");
                 }          
+            }
+            
+            if(e.getSource() == jBModificar){
+                /*// Bloqueamos el boton Buscar
+                jTFNombre.setEditable(true);
+                jTFDireccion.setEditable(true);
+                jTFCedulaDirector.setEditable(true);
+                // Desbloqueamos el Internal Frame     
+                setLocked(false);
+                // Definimos un nuevo tamaño.
+                setSize(WIDTH_, 240);
+                // Definimos el layot del panel...  
+                jPUpdatePassword = new JPanel();
+                jPUpdatePassword.setLayout(new BorderLayout());
+                jPUpdatePassword.setBorder(new EtchedBorder());
+                                
+                // Creamos un panel para los botones
+                JPanel jPUpdateButtons = new JPanel();
+                //jPUpdateButtons.setLayout(new GridLayout(1, 2));
+                jPUpdateButtons.setLayout(new FlowLayout());
+                jPUpdateButtons.setBorder(new EtchedBorder());
+                // Creamos los botones.
+                jBModificar = new JButton("MODIFICAR");
+                jBModificar.addActionListener(manejadorEventos);
+
+                jBEliminar = new JButton("ELIMINAR");
+                jBEliminar.addActionListener(manejadorEventos);
+
+                jBBuscar = new JButton("BUSCAR DE NUEVO");
+                jBBuscar.addActionListener(manejadorEventos);
+
+                // Procedemos a agregar los botones al panel
+                jPUpdateButtons.add(jBModificar);
+                jPUpdateButtons.add(jBEliminar);
+                jPUpdateButtons.add(jBBuscar);
+                // Procedemos a armar el panel completo.
+                jPUpdatePassword.add(jPUpdateButtons, "Last");
+                // Agregamos el panel ala ventana principal
+                this.add(jPUpdatePassword, "South");
+                // Bloqueamos de nuevo el internal frame.
+                setLocked(true);
+                // Actualizamos la interfaz.
+                updateUI();*/
+            }
+            
+            if(e.getSource() == jBBuscar){
+                jBBuscarEstacion.setEnabled(true);
+                jTFCodigoEstacion.setEditable(true);
+                jCBCodigoEstacion.setEnabled(true);
             }
         }
     }

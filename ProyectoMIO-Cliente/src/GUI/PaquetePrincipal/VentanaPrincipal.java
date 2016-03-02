@@ -97,9 +97,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jSParametrization01 = new javax.swing.JPopupMenu.Separator();
         jMGestionInformacionEstacion = new javax.swing.JMenu();
         jMICrearEstacion = new javax.swing.JMenuItem();
-        jMIBuscarEstacion = new javax.swing.JMenuItem();
-        jMIModificarEstacion = new javax.swing.JMenuItem();
-        jMIEliminarEstacion = new javax.swing.JMenuItem();
+        jMIBMEEstacion = new javax.swing.JMenuItem();
         jMReports = new javax.swing.JMenu();
         jMListings = new javax.swing.JMenu();
         jMIReportsUsers = new javax.swing.JMenuItem();
@@ -170,19 +168,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         jMGestionInformacionEstacion.add(jMICrearEstacion);
 
-        jMIBuscarEstacion.setText("Buscar");
-        jMIBuscarEstacion.addActionListener(new java.awt.event.ActionListener() {
+        jMIBMEEstacion.setText("Buscar, Modificar y Eliminar");
+        jMIBMEEstacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMIBuscarEstacionActionPerformed(evt);
+                jMIBMEEstacionActionPerformed(evt);
             }
         });
-        jMGestionInformacionEstacion.add(jMIBuscarEstacion);
-
-        jMIModificarEstacion.setText("Modificar");
-        jMGestionInformacionEstacion.add(jMIModificarEstacion);
-
-        jMIEliminarEstacion.setText("Eliminar");
-        jMGestionInformacionEstacion.add(jMIEliminarEstacion);
+        jMGestionInformacionEstacion.add(jMIBMEEstacion);
 
         jMParametrization.add(jMGestionInformacionEstacion);
 
@@ -452,7 +444,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }*/
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void jMIBuscarEstacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIBuscarEstacionActionPerformed
+    private void jMIBMEEstacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIBMEEstacionActionPerformed
         try {
             JIFBuscarEstacion internalFrame = new JIFBuscarEstacion("Gestión de Estaciones", (int) getSize().width, (int) getSize().height);
             fondo.add(internalFrame);
@@ -460,7 +452,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         } catch (MiExcepcion ex) {
             throwerM.mostrarMessageDialog(ex.getMessage(), "Buscar Estación", JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_jMIBuscarEstacionActionPerformed
+    }//GEN-LAST:event_jMIBMEEstacionActionPerformed
    
     /**
      * setAppearance Metodo encargado de poner el Look And Feel del Frame.
@@ -600,14 +592,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMGraphics;
     private javax.swing.JMenu jMHelp;
     private javax.swing.JMenuItem jMIAbout;
-    private javax.swing.JMenuItem jMIBuscarEstacion;
+    private javax.swing.JMenuItem jMIBMEEstacion;
     private javax.swing.JMenuItem jMICrearEstacion;
-    private javax.swing.JMenuItem jMIEliminarEstacion;
     private javax.swing.JMenuItem jMIFileClose;
     private javax.swing.JMenuItem jMIFileLogout;
     private javax.swing.JMenuItem jMIFileViewProfile;
     private javax.swing.JMenuItem jMIGestionInformacionEmpleados;
-    private javax.swing.JMenuItem jMIModificarEstacion;
     private javax.swing.JMenuItem jMIPaymentReceipt;
     private javax.swing.JMenuItem jMIPayroll;
     private javax.swing.JMenu jMIPayrollReports;
