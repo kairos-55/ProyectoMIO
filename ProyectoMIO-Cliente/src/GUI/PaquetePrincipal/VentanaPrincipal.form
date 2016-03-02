@@ -46,31 +46,23 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMParametrization">
           <Properties>
-            <Property name="text" type="java.lang.String" value="PARAMETRIZACI&#xd3;N"/>
+            <Property name="text" type="java.lang.String" value="GESTI&#xd3;N INFORMACI&#xd3;N"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMIParametrizationUsers">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Usuarios"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMIParametrizationUsersActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMIParametrizationEmployees">
+            <MenuItem class="javax.swing.JMenuItem" name="jMIGestionInformacionEmpleados">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Empleados"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMIParametrizationEmployeesActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMIGestionInformacionEmpleadosActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMIParametrizationOffices">
+            <MenuItem class="javax.swing.JMenuItem" name="jMIGestionInformacionEstacion">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Sedes"/>
+                <Property name="text" type="java.lang.String" value="Estaciones"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMIParametrizationOfficesActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMIGestionInformacionEstacionActionPerformed"/>
               </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSParametrization01">
@@ -90,29 +82,6 @@
                 </MenuItem>
               </SubComponents>
             </Menu>
-          </SubComponents>
-        </Menu>
-        <Menu class="javax.swing.JMenu" name="jMPayroll">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="N&#xd3;MINA"/>
-          </Properties>
-          <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMIDefiningPeriod">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Definir Periodo"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMIDefiningPeriodActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMIPayrollLiquidate">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Liquidar Nomina"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMIPayrollLiquidateActionPerformed"/>
-              </Events>
-            </MenuItem>
           </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMReports">

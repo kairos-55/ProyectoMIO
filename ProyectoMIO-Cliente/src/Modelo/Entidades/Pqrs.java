@@ -12,7 +12,6 @@ package Modelo.Entidades;
 
 public class Pqrs {
     
-    private String cedulaEmpleado;
     private int idEstacion;    
     private String fecha;
     private String motivo;
@@ -20,9 +19,8 @@ public class Pqrs {
     private String descripcion;
     private String estado;
         
-    public Pqrs(String cedulaEmpleado, int idEstacion, String fecha, String motivo, String cedulaUsuario, String descripcion, String estado) {
+    public Pqrs(int idEstacion, String fecha, String motivo, String cedulaUsuario, String descripcion, String estado) {
         
-        this.cedulaEmpleado = cedulaEmpleado;
         this.idEstacion = idEstacion;        
         this.fecha = fecha;
         this.motivo = motivo;
@@ -30,14 +28,6 @@ public class Pqrs {
         this.descripcion = descripcion;
         this.estado = estado;
                 
-    }
-
-    public void setCedulaEmpleado(String cedulaEmpleado) {
-        this.cedulaEmpleado = cedulaEmpleado;
-    }
-
-    public String getCedulaEmpleado() {
-        return cedulaEmpleado;
     }
 
     public void setidEstacion(int nombreEstacion) {

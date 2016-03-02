@@ -12,22 +12,22 @@ package Modelo.Entidades;
 
 public class Parada {
  
-    private int idParada;
+    private int idRecorrido;
     private int idEstacion;
     
-    public Parada(int idParada, int idEstacion){
+    public Parada(int idRecorrido, int idEstacion){
         
-        this.idParada = idParada;
+        this.idRecorrido = idRecorrido;
         this.idEstacion = idEstacion;
         
     }
 
-    public void setIdParada(int idParada) {
-        this.idParada = idParada;
+    public void setIdRecorrido(int idRecorrido) {
+        this.idRecorrido = idRecorrido;
     }
 
-    public int getIdParada() {
-        return idParada;
+    public int getIdRecorrido() {
+        return idRecorrido;
     }    
     
     public void setIdEstacion(int idEstacion) {

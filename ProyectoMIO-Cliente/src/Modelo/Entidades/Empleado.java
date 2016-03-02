@@ -1,4 +1,4 @@
-package Tablas;
+package Modelo.Entidades;
 
 /**
  *
@@ -21,7 +21,7 @@ public class Empleado {
     private String estadoCivil;
     private String cargo;
         
-    public Empleado(String cedula, double salario, String nombre, String apellidos, String telefono, String fechaNacimiento, String estadoCivil, String cargo) {
+    public Empleado(String cedula, double salario, String nombres, String apellidos, String telefono, String fechaNacimiento, String estadoCivil, String cargo) {
         
         this.cedula = cedula;
         this.salario = salario;

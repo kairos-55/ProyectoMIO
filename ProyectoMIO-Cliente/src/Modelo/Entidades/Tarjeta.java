@@ -14,15 +14,17 @@ public class Tarjeta {
     
     private String id;
     private double saldo;
-    private int punto_venta;
-    private String empleado_vendedor;
-        
-    public Tarjeta(String id, double saldo, int punto_venta, String empleado_vendedor) {
+    private String cedulaEmpleado;
+    private String fechaVenta;
+    private String horaVenta;
+            
+    public Tarjeta(String id, double saldo, String cedulaEmpleado, String fechaVenta, String horaVenta) {
         
         this.id = id;
         this.saldo = saldo;
-        this.punto_venta = punto_venta;
-        this.empleado_vendedor = empleado_vendedor;
+        this.cedulaEmpleado = cedulaEmpleado;
+        this.fechaVenta = fechaVenta;
+        this.horaVenta = horaVenta;
         
     }
 
@@ -42,20 +44,28 @@ public class Tarjeta {
         return saldo;
     }
 
-    public void setPunto_venta(int punto_venta) {
-        this.punto_venta = punto_venta;
+    public void setCedulaEmpleado(String cedulaEmpleado) {
+        this.cedulaEmpleado = cedulaEmpleado;
     }
 
-    public int getPunto_venta() {
-        return punto_venta;
+    public String getCedulaEmpleado() {
+        return cedulaEmpleado;
     }
 
-    public void setEmpleado_vendedor(String empleado_vendedor) {
-        this.empleado_vendedor = empleado_vendedor;
+    public void setFechaVenta(String fechaVenta) {
+        this.fechaVenta = fechaVenta;
     }
 
-    public String getEmpleado_vendedor() {
-        return empleado_vendedor;
-    }      
+    public String getFechaVenta() {
+        return fechaVenta;
+    }
+
+    public void setHoraVenta(String horaVenta) {
+        this.horaVenta = horaVenta;
+    }
+
+    public String getHoraVenta() {
+        return horaVenta;
+    }    
 
 }
