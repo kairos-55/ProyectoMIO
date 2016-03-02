@@ -36,11 +36,12 @@ public class Validador {
      */
     public void validarCampoVacio(String dato, String nombreCampo) throws MiExcepcion {
         
-        if(dato==null){
+        if ("".equals(dato)) {
+            
             throw new MiExcepcion(nombreCampo + " es un campo obligatorio.");
-        }else if (dato.trim()==null) {
-            throw new MiExcepcion(nombreCampo + " es un campo obligatorio.");
+            
         }
+        
     }
     
 

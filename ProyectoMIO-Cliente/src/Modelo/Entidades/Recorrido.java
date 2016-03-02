@@ -28,11 +28,7 @@ public class Recorrido {
 
     public int getId() {
         return id;
-<<<<<<< HEAD
     }  
-=======
-    } 
->>>>>>> 0afe7c01763a62b072cb38f00cf58ab02731edad
     
     public void setNombre(String nombre) {
         this.nombre = nombre;

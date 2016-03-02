@@ -21,7 +21,7 @@ import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 
 /**
  *
- * JIFEstacion
+ * JIFCrearEstacion
  * 
  * @author Mauricio Bernardo Dominguez Bocanegra. Código: 9927680
  * @author Martha Cecilia Holguin Tovar. Código: 1129455
@@ -29,7 +29,7 @@ import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
  * 
  */
 
-public class JIFEstacion extends AnclarVentanaInterna {
+public class JIFCrearEstacion extends AnclarVentanaInterna {
 
     /**
      * Creates new form JIFEmployee
@@ -38,7 +38,7 @@ public class JIFEstacion extends AnclarVentanaInterna {
      * @param parent_w
      * @param parent_h
      */
-    public JIFEstacion(String titulo, int parent_w, int parent_h) {
+    public JIFCrearEstacion(String titulo, int parent_w, int parent_h) throws MiExcepcion {
         super();
         setTitle(titulo);
         setResizable(false);
@@ -77,7 +77,7 @@ public class JIFEstacion extends AnclarVentanaInterna {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPFormControl = new javax.swing.JPanel();
+        jPBotonCrear = new javax.swing.JPanel();
         jBCrearEstacion = new javax.swing.JButton();
         jPInformacionEstacion = new javax.swing.JPanel();
         jLCodigoEstacion = new javax.swing.JLabel();
@@ -93,7 +93,7 @@ public class JIFEstacion extends AnclarVentanaInterna {
         setPreferredSize(new java.awt.Dimension(407, 800));
         getContentPane().setLayout(new java.awt.BorderLayout(10, 10));
 
-        jPFormControl.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPBotonCrear.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jBCrearEstacion.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jBCrearEstacion.setText("CREAR ESTACIÓN");
@@ -102,9 +102,9 @@ public class JIFEstacion extends AnclarVentanaInterna {
                 jBCrearEstacionActionPerformed(evt);
             }
         });
-        jPFormControl.add(jBCrearEstacion);
+        jPBotonCrear.add(jBCrearEstacion);
 
-        getContentPane().add(jPFormControl, java.awt.BorderLayout.PAGE_END);
+        getContentPane().add(jPBotonCrear, java.awt.BorderLayout.PAGE_END);
 
         jPInformacionEstacion.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPInformacionEstacion.setLayout(new java.awt.GridLayout(4, 2, 20, 20));
@@ -190,17 +190,24 @@ public class JIFEstacion extends AnclarVentanaInterna {
         jBCrearEstacion.setEnabled(bool);
        
     }
-    
-    private void actualizarListaEmpleados() {
-        try {
-            Empleado[] empleados = controlEmpleado.listarEmpleados();
-            Vector empleados_ = new Vector();
-            empleados_.add(" ");
-            empleados_.addAll(Arrays.asList(empleados));
-            jCBCedulaDirector.setModel(new javax.swing.DefaultComboBoxModel(empleados_));
-        } catch (MiExcepcion ex) {
-            lanzarMensaje.mostrarMessageDialog(ex.getMessage(), title, JOptionPane.ERROR_MESSAGE);
+        
+    private void actualizarListaEmpleados() throws MiExcepcion {
+        Empleado[] empleados = controlEmpleado.listarEmpleados();
+        if ((Arrays.asList(empleados)).isEmpty()) {
+            throw new MiExcepcion("No hay empleados registrados en la base de datos.");
         }
+        
+        String[] cedulas = new String[empleados.length+1];
+        
+        cedulas[0] = "Seleccione la cédula del director...";
+        
+        for(int i=1; i<=empleados.length; i++){
+            
+            cedulas[i] = empleados[i-1].getCedula();
+            
+        }
+        
+        jCBCedulaDirector.setModel(new javax.swing.DefaultComboBoxModel(cedulas));
     }
 
     private void pinTab(int actualTab) {
@@ -229,20 +236,23 @@ public class JIFEstacion extends AnclarVentanaInterna {
         informacion[2] = jTFDireccionEstacion.getText().trim().toUpperCase();
         informacion[3] = (String) jCBCedulaDirector.getSelectedItem();
                       
-        try {
-            
-            controlEstacion.crearEstacion(informacion);
-            System.out.println("ESTACIÓN CREADA");
+        try {                           
             
             validador.validarCampoVacio(informacion[0], "CÓDIGO");
             validador.validarCampoVacio(informacion[1], "NOMBRE");
             validador.validarCampoVacio(informacion[2], "DIRECCIÓN");
             validador.validarCampoVacio(informacion[3], "CÉDULA DIRECTOR");
             
-            validador.validarInteger(informacion[0]);
+            //validador.validarInteger(informacion[0]);
+            
+            controlEstacion.crearEstacion(informacion);
+            
+            lanzarMensaje.mostrarMessageDialog("La estación fue creada con éxito.", title, JOptionPane.INFORMATION_MESSAGE); 
             
         } catch (MiExcepcion ex) {
-            Logger.getLogger(JIFEstacion.class.getName()).log(Level.SEVERE, null, ex);
+            
+            lanzarMensaje.mostrarMessageDialog(ex.getMessage(), title, JOptionPane.ERROR_MESSAGE);
+            
         }
         
     }//GEN-LAST:event_jBCrearEstacionActionPerformed
@@ -254,7 +264,7 @@ public class JIFEstacion extends AnclarVentanaInterna {
     private javax.swing.JLabel jLCodigoEstacion;
     private javax.swing.JLabel jLDireccionEstacion;
     private javax.swing.JLabel jLNombreEstacion;
-    private javax.swing.JPanel jPFormControl;
+    private javax.swing.JPanel jPBotonCrear;
     private javax.swing.JPanel jPInformacionEstacion;
     private javax.swing.JTextField jTFCodigoEstacion;
     private javax.swing.JTextField jTFDireccionEstacion;

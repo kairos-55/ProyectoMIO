@@ -41,4 +41,52 @@ public class ControlEstacion extends Control {
         }
     }
     
+    public Estacion buscarEstacion(String codigo) throws MiExcepcion {
+        sqlStatement = "SELECT * FROM estacion WHERE "
+                + "id_estacion = " + codigo + ";";
+        try {
+            Request request = new Request();
+            request.setType("QUERY");
+            request.setSqlRequest(sqlStatement);
+            request.setColumns(5);
+            Reply ok = administradorCliente.peticion(request);
+            // Verificamos que el proceso se haya realizado con exito.            
+            manejadorErrores.respuesta(ok);
+            Object[] estacion = ((ArrayList<Object[]>) ok.getPayload()).get(0);
+            Estacion estacion_ = new Estacion(Integer.parseInt((String) estacion[0]), (String) estacion[1], (String) estacion[2], (String) estacion[3]);
+            return estacion_;
+        } catch (IOException | ClassNotFoundException ex) {
+            throw new MiExcepcion("Error al obtener la estación con el código " + codigo + ":\n" + ex.getMessage());
+        } catch (IndexOutOfBoundsException ex) {
+            throw new MiExcepcion("La estación con el código " + codigo + " no se encuentra registrada.");
+        }
+    }
+    
+    public Estacion[] listarEstaciones() throws MiExcepcion {
+        sqlStatement = "SELECT * FROM estacion WHERE estado_estacion = TRUE;";
+        try {Request request = new Request();
+            request.setType("QUERY");
+            request.setSqlRequest(sqlStatement);
+            request.setColumns(5);
+            Reply ok = administradorCliente.peticion(request);
+            manejadorErrores.respuesta(ok);
+            
+            ArrayList<Object[]> estaciones = (ArrayList<Object[]>)ok.getPayload();
+            Estacion[] estacion_ = new Estacion[estaciones.size()];
+            for (int i = 0; i < estaciones.size(); i++) {
+                Object[] row = estaciones.get(i);
+                Estacion estacion = new Estacion(
+                        Integer.parseInt((String)row[0]), 
+                        (String)row[1],
+                        (String)row[2],
+                        (String)row[3]                        
+                );
+                estacion_[i] = estacion;
+            }
+            return estacion_;
+        } catch (IOException | ClassNotFoundException ex) {
+            throw new MiExcepcion("Error al listar las estaciones:\n" + ex.getMessage());
+        }
+    }
+    
 }

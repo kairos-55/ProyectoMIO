@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class ControlEmpleado extends Control {
     
     public Empleado[] listarEmpleados() throws MiExcepcion {
-        sqlStatement = "SELECT * FROM empleado;";
+        sqlStatement = "SELECT * FROM empleado WHERE estado_empleado = TRUE;";
         try {Request request = new Request();
             request.setType("QUERY");
             request.setSqlRequest(sqlStatement);

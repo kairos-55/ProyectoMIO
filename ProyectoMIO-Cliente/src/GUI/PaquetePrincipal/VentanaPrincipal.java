@@ -5,7 +5,8 @@ import Modelo.Excepciones.MiExcepcion;
 import GUI.Fondo.JPFondo;
 import GUI.FechaSistema.JPFechaSistema;
 import GUI.GestionInformacion.Empleado.JIFEmpleado;
-import GUI.GestionInformacion.Estacion.JIFEstacion;
+import GUI.GestionInformacion.Estacion.JIFBuscarEstacion;
+import GUI.GestionInformacion.Estacion.JIFCrearEstacion;
 /*import Control.EmployeeControl;
 import Control.OfficeControl;
 import Control.UseraccountControl;
@@ -93,10 +94,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMIFileClose = new javax.swing.JMenuItem();
         jMParametrization = new javax.swing.JMenu();
         jMIGestionInformacionEmpleados = new javax.swing.JMenuItem();
-        jMIGestionInformacionEstacion = new javax.swing.JMenuItem();
         jSParametrization01 = new javax.swing.JPopupMenu.Separator();
-        jMParametrizationPayroll = new javax.swing.JMenu();
-        jMIPayrollConcepts = new javax.swing.JMenuItem();
+        jMGestionInformacionEstacion = new javax.swing.JMenu();
+        jMICrearEstacion = new javax.swing.JMenuItem();
+        jMIBuscarEstacion = new javax.swing.JMenuItem();
+        jMIModificarEstacion = new javax.swing.JMenuItem();
+        jMIEliminarEstacion = new javax.swing.JMenuItem();
         jMReports = new javax.swing.JMenu();
         jMListings = new javax.swing.JMenu();
         jMIReportsUsers = new javax.swing.JMenuItem();
@@ -146,7 +149,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jMBMenu.add(jMFile);
 
-        jMParametrization.setText("GESTIÓN INFORMACIÓN");
+        jMParametrization.setText("GESTIÓN DE INFORMACIÓN");
 
         jMIGestionInformacionEmpleados.setText("Empleados");
         jMIGestionInformacionEmpleados.addActionListener(new java.awt.event.ActionListener() {
@@ -155,27 +158,33 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
         jMParametrization.add(jMIGestionInformacionEmpleados);
-
-        jMIGestionInformacionEstacion.setText("Estaciones");
-        jMIGestionInformacionEstacion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMIGestionInformacionEstacionActionPerformed(evt);
-            }
-        });
-        jMParametrization.add(jMIGestionInformacionEstacion);
         jMParametrization.add(jSParametrization01);
 
-        jMParametrizationPayroll.setText("Nómina");
+        jMGestionInformacionEstacion.setText("Estaciones");
 
-        jMIPayrollConcepts.setText("Conceptos de Nómina");
-        jMIPayrollConcepts.addActionListener(new java.awt.event.ActionListener() {
+        jMICrearEstacion.setText("Crear");
+        jMICrearEstacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMIPayrollConceptsActionPerformed(evt);
+                jMICrearEstacionActionPerformed(evt);
             }
         });
-        jMParametrizationPayroll.add(jMIPayrollConcepts);
+        jMGestionInformacionEstacion.add(jMICrearEstacion);
 
-        jMParametrization.add(jMParametrizationPayroll);
+        jMIBuscarEstacion.setText("Buscar");
+        jMIBuscarEstacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMIBuscarEstacionActionPerformed(evt);
+            }
+        });
+        jMGestionInformacionEstacion.add(jMIBuscarEstacion);
+
+        jMIModificarEstacion.setText("Modificar");
+        jMGestionInformacionEstacion.add(jMIModificarEstacion);
+
+        jMIEliminarEstacion.setText("Eliminar");
+        jMGestionInformacionEstacion.add(jMIEliminarEstacion);
+
+        jMParametrization.add(jMGestionInformacionEstacion);
 
         jMBMenu.add(jMParametrization);
 
@@ -344,11 +353,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }*/ 
     }//GEN-LAST:event_jMIReportsUsersActionPerformed
 
-    private void jMIPayrollConceptsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIPayrollConceptsActionPerformed
-        /*JIFPayrollConcepts internalFrame = new JIFPayrollConcepts("Conceptos de Nómina (Novedades)", (int) getSize().width, (int) getSize().height);
-        background.add(internalFrame);
-        internalFrame.setVisible(true);*/
-    }//GEN-LAST:event_jMIPayrollConceptsActionPerformed
+    private void jMICrearEstacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMICrearEstacionActionPerformed
+        try {
+            JIFCrearEstacion internalFrame = new JIFCrearEstacion("Nueva Estación", (int) getSize().width, (int) getSize().height);
+            fondo.add(internalFrame);
+            internalFrame.setVisible(true);
+        } catch (MiExcepcion ex) {
+            throwerM.mostrarMessageDialog(ex.getMessage(), "Crear Estación", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jMICrearEstacionActionPerformed
 
     private void jMIReportsOfficesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIReportsOfficesActionPerformed
         /*OfficeControl control = new OfficeControl(); 
@@ -439,11 +452,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }*/
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void jMIGestionInformacionEstacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIGestionInformacionEstacionActionPerformed
-        JIFEstacion internalFrame = new JIFEstacion("Nueva Estación", (int) getSize().width, (int) getSize().height);
-        fondo.add(internalFrame);
-        internalFrame.setVisible(true);
-    }//GEN-LAST:event_jMIGestionInformacionEstacionActionPerformed
+    private void jMIBuscarEstacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIBuscarEstacionActionPerformed
+        try {
+            JIFBuscarEstacion internalFrame = new JIFBuscarEstacion("Gestión de Estaciones", (int) getSize().width, (int) getSize().height);
+            fondo.add(internalFrame);
+            internalFrame.setVisible(true);
+        } catch (MiExcepcion ex) {
+            throwerM.mostrarMessageDialog(ex.getMessage(), "Buscar Estación", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jMIBuscarEstacionActionPerformed
    
     /**
      * setAppearance Metodo encargado de poner el Look And Feel del Frame.
@@ -566,9 +583,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMIFileClose.setEnabled(bool);
         jMIFileLogout.setEnabled(bool);
         jMIFileViewProfile.setEnabled(bool);
-        jMIGestionInformacionEstacion.setEnabled(bool);
+        jMGestionInformacionEstacion.setEnabled(bool);
         jMIGestionInformacionEmpleados.setEnabled(bool);
-        jMIPayrollConcepts.setEnabled(bool);
+        jMICrearEstacion.setEnabled(bool);
         jMIReportsEmployees.setEnabled(bool);
         jMIReportsOffices.setEnabled(bool);
         jMIReportsUsers.setEnabled(bool);
@@ -579,24 +596,26 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator aJSOffices;
     private javax.swing.JMenuBar jMBMenu;
     private javax.swing.JMenu jMFile;
+    private javax.swing.JMenu jMGestionInformacionEstacion;
     private javax.swing.JMenu jMGraphics;
     private javax.swing.JMenu jMHelp;
     private javax.swing.JMenuItem jMIAbout;
+    private javax.swing.JMenuItem jMIBuscarEstacion;
+    private javax.swing.JMenuItem jMICrearEstacion;
+    private javax.swing.JMenuItem jMIEliminarEstacion;
     private javax.swing.JMenuItem jMIFileClose;
     private javax.swing.JMenuItem jMIFileLogout;
     private javax.swing.JMenuItem jMIFileViewProfile;
     private javax.swing.JMenuItem jMIGestionInformacionEmpleados;
-    private javax.swing.JMenuItem jMIGestionInformacionEstacion;
+    private javax.swing.JMenuItem jMIModificarEstacion;
     private javax.swing.JMenuItem jMIPaymentReceipt;
     private javax.swing.JMenuItem jMIPayroll;
-    private javax.swing.JMenuItem jMIPayrollConcepts;
     private javax.swing.JMenu jMIPayrollReports;
     private javax.swing.JMenuItem jMIReportsEmployees;
     private javax.swing.JMenuItem jMIReportsOffices;
     private javax.swing.JMenuItem jMIReportsUsers;
     private javax.swing.JMenu jMListings;
     private javax.swing.JMenu jMParametrization;
-    private javax.swing.JMenu jMParametrizationPayroll;
     private javax.swing.JMenu jMReports;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPopupMenu.Separator jSFile01;

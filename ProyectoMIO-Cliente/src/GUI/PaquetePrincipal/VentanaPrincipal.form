@@ -46,7 +46,7 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMParametrization">
           <Properties>
-            <Property name="text" type="java.lang.String" value="GESTI&#xd3;N INFORMACI&#xd3;N"/>
+            <Property name="text" type="java.lang.String" value="GESTI&#xd3;N DE INFORMACI&#xd3;N"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMIGestionInformacionEmpleados">
@@ -57,28 +57,38 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMIGestionInformacionEmpleadosActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMIGestionInformacionEstacion">
+            <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSParametrization01">
+            </MenuItem>
+            <Menu class="javax.swing.JMenu" name="jMGestionInformacionEstacion">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Estaciones"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMIGestionInformacionEstacionActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSParametrization01">
-            </MenuItem>
-            <Menu class="javax.swing.JMenu" name="jMParametrizationPayroll">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="N&#xf3;mina"/>
-              </Properties>
               <SubComponents>
-                <MenuItem class="javax.swing.JMenuItem" name="jMIPayrollConcepts">
+                <MenuItem class="javax.swing.JMenuItem" name="jMICrearEstacion">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Conceptos de N&#xf3;mina"/>
+                    <Property name="text" type="java.lang.String" value="Crear"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMIPayrollConceptsActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMICrearEstacionActionPerformed"/>
                   </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="jMIBuscarEstacion">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Buscar"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMIBuscarEstacionActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="jMIModificarEstacion">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Modificar"/>
+                  </Properties>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="jMIEliminarEstacion">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Eliminar"/>
+                  </Properties>
                 </MenuItem>
               </SubComponents>
             </Menu>
