@@ -62,6 +62,44 @@ public class ControlEstacion extends Control {
         }
     }
     
+    public void modificarEstacion(String[] informacion) throws MiExcepcion {
+        Estacion estacion = new Estacion(Integer.parseInt(informacion[0]), informacion[1], informacion[2], informacion[3]);
+        sqlStatement = "UPDATE estacion SET "
+                + "nombre_estacion = '" + estacion.getNombre() + "', "
+                + "direccion = '" + estacion.getDireccion() + "', "
+                + "cedula_empleado = '" + estacion.getCedulaDirector() + "' "
+                + "WHERE id_estacion = '" + estacion.getId() + "';";
+        try {
+            // Realizamos la petición.
+            Request request = new Request();
+            request.setType("UPDATE");
+            request.setSqlRequest(sqlStatement);
+            Reply ok = administradorCliente.peticion(request);
+            // Verificamos que el proceso se haya realizado con exito.            
+            manejadorErrores.respuesta(ok);
+        } catch (IOException | ClassNotFoundException ex) {
+            throw new MiExcepcion("Error al modificar los datos de la estación " + estacion.getNombre().toUpperCase() + ":\n" + ex.getMessage());
+        }
+    }
+    
+    public void eliminarEstacion(String codigo) throws MiExcepcion {
+        sqlStatement = "UPDATE estacion SET "
+                + "estado_estacion = FALSE " 
+                + "WHERE id_estacion = '" + codigo + "';";
+        
+        try {
+            // Realizamos la petición.
+            Request request = new Request();
+            request.setType("UPDATE");
+            request.setSqlRequest(sqlStatement);
+            Reply ok = administradorCliente.peticion(request);
+            // Verificamos que el proceso se haya realizado con exito.            
+            manejadorErrores.respuesta(ok);
+        } catch (IOException | ClassNotFoundException ex) {
+            throw new MiExcepcion("Error al momento de eliminar la estación con código " + codigo + ":\n" + ex.getMessage());
+        }
+    }
+    
     public Estacion[] listarEstaciones() throws MiExcepcion {
         sqlStatement = "SELECT * FROM estacion WHERE estado_estacion = TRUE;";
         try {Request request = new Request();

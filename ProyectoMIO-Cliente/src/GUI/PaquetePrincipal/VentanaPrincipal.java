@@ -93,7 +93,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jSFile01 = new javax.swing.JPopupMenu.Separator();
         jMIFileClose = new javax.swing.JMenuItem();
         jMParametrization = new javax.swing.JMenu();
-        jMIGestionInformacionEmpleados = new javax.swing.JMenuItem();
         jSParametrization01 = new javax.swing.JPopupMenu.Separator();
         jMGestionInformacionEstacion = new javax.swing.JMenu();
         jMICrearEstacion = new javax.swing.JMenuItem();
@@ -148,14 +147,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMBMenu.add(jMFile);
 
         jMParametrization.setText("GESTIÓN DE INFORMACIÓN");
-
-        jMIGestionInformacionEmpleados.setText("Empleados");
-        jMIGestionInformacionEmpleados.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMIGestionInformacionEmpleadosActionPerformed(evt);
-            }
-        });
-        jMParametrization.add(jMIGestionInformacionEmpleados);
         jMParametrization.add(jSParametrization01);
 
         jMGestionInformacionEstacion.setText("Estaciones");
@@ -372,12 +363,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }*/
     }//GEN-LAST:event_jMIReportsOfficesActionPerformed
 
-    private void jMIGestionInformacionEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIGestionInformacionEmpleadosActionPerformed
-        JIFEmpleado internalFrame = new JIFEmpleado("Gestión de Empleados", (int) getSize().width, (int) getSize().height);
-        fondo.add(internalFrame);
-        internalFrame.setVisible(true);
-    }//GEN-LAST:event_jMIGestionInformacionEmpleadosActionPerformed
-
     private void aJMIReportsEmployee_OfficeListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aJMIReportsEmployee_OfficeListActionPerformed
         /*String title = "Lista de Empleados por Sede";
         EmployeeControl eControl = new EmployeeControl();
@@ -575,8 +560,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMIFileClose.setEnabled(bool);
         jMIFileLogout.setEnabled(bool);
         jMIFileViewProfile.setEnabled(bool);
-        jMGestionInformacionEstacion.setEnabled(bool);
-        jMIGestionInformacionEmpleados.setEnabled(bool);
+        jMGestionInformacionEstacion.setEnabled(bool);       
         jMICrearEstacion.setEnabled(bool);
         jMIReportsEmployees.setEnabled(bool);
         jMIReportsOffices.setEnabled(bool);
@@ -597,7 +581,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMIFileClose;
     private javax.swing.JMenuItem jMIFileLogout;
     private javax.swing.JMenuItem jMIFileViewProfile;
-    private javax.swing.JMenuItem jMIGestionInformacionEmpleados;
     private javax.swing.JMenuItem jMIPaymentReceipt;
     private javax.swing.JMenuItem jMIPayroll;
     private javax.swing.JMenu jMIPayrollReports;
