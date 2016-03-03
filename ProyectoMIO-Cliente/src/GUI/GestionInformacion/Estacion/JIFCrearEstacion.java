@@ -4,19 +4,15 @@ import GUI.PaquetePrincipal.AnclarVentanaInterna;
 import Modelo.Validadores.LanzarMensaje;
 import Modelo.Excepciones.MiExcepcion;
 import Modelo.Validadores.Validador;
-import Modelo.Entidades.Estacion;
 import Modelo.Entidades.Empleado;
 import Control.ControlEstacion;
 import Control.ControlEmpleado;
+import Modelo.Entidades.Estacion;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.util.Arrays;
-import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 
 /**
@@ -40,12 +36,14 @@ public class JIFCrearEstacion extends AnclarVentanaInterna {
      */
     public JIFCrearEstacion(String titulo, int parent_w, int parent_h) throws MiExcepcion {
         super();
+        this.parentWidth = parent_w;
+        this.parentHeight = parent_h;
         setTitle(titulo);
         setResizable(false);
         setClosable(true);
         setMaximizable(false);
-        setSize(900, 425);
-        setLocation((int) (Math.abs(parent_w - getSize().width) / 2), (int) (Math.abs(parent_h - getSize().height) / 2));
+        setSize(WIDTH_, HEIGHT_);
+        setLocation((int) (Math.abs(this.parentWidth - this.getSize().width) / 2), (int) (Math.abs(this.parentHeight - this.getSize().height) / 2));
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLocked(true);
         // INICIALIZAMOS COMPONENTES
@@ -107,14 +105,16 @@ public class JIFCrearEstacion extends AnclarVentanaInterna {
         getContentPane().add(jPBotonCrear, java.awt.BorderLayout.PAGE_END);
 
         jPInformacionEstacion.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPInformacionEstacion.setLayout(new java.awt.GridLayout(4, 2, 20, 20));
+        jPInformacionEstacion.setLayout(new java.awt.GridLayout(4, 2, 0, 10));
 
         jLCodigoEstacion.setFont(new java.awt.Font("Ubuntu", 0, 15)); // NOI18N
+        jLCodigoEstacion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLCodigoEstacion.setText("Código:");
         jPInformacionEstacion.add(jLCodigoEstacion);
         jPInformacionEstacion.add(jTFCodigoEstacion);
 
         jLNombreEstacion.setFont(new java.awt.Font("Ubuntu", 0, 15)); // NOI18N
+        jLNombreEstacion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLNombreEstacion.setText("Nombre:");
         jPInformacionEstacion.add(jLNombreEstacion);
 
@@ -122,11 +122,13 @@ public class JIFCrearEstacion extends AnclarVentanaInterna {
         jPInformacionEstacion.add(jTFNombreEstacion);
 
         jLDireccionEstacion.setFont(new java.awt.Font("Ubuntu", 0, 15)); // NOI18N
+        jLDireccionEstacion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLDireccionEstacion.setText("Direccion:");
         jPInformacionEstacion.add(jLDireccionEstacion);
         jPInformacionEstacion.add(jTFDireccionEstacion);
 
         jLCedulaDirector.setFont(new java.awt.Font("Ubuntu", 0, 15)); // NOI18N
+        jLCedulaDirector.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLCedulaDirector.setText("Cédula Director:");
         jPInformacionEstacion.add(jLCedulaDirector);
 
@@ -140,8 +142,10 @@ public class JIFCrearEstacion extends AnclarVentanaInterna {
     /**
      * cleanGeneralDataForm.
      */
-    private void cleanGeneralDataForm() {
+    private void limpiarCampos() {
+                
         jTFCodigoEstacion.setText("");
+        jTFNombreEstacion.setText("");
         jTFDireccionEstacion.setText("");
         jCBCedulaDirector.setSelectedIndex(0);
         
@@ -243,11 +247,25 @@ public class JIFCrearEstacion extends AnclarVentanaInterna {
             validador.validarCampoVacio(informacion[2], "DIRECCIÓN");
             validador.validarCampoVacio(informacion[3], "CÉDULA DIRECTOR");
             
-            //validador.validarInteger(informacion[0]);
+            validador.validarCadenaNumeros(informacion[0]);
             
-            controlEstacion.crearEstacion(informacion);
+            Estacion[] estacion = controlEstacion.yaEsDirector(informacion[3]);
             
-            lanzarMensaje.mostrarMessageDialog("La estación fue creada con éxito.", title, JOptionPane.INFORMATION_MESSAGE); 
+            if ((Arrays.asList(estacion)).isEmpty()) {
+                
+                controlEstacion.crearEstacion(informacion);
+
+                lanzarMensaje.mostrarMessageDialog("La estación fue creada con éxito.", title, JOptionPane.INFORMATION_MESSAGE); 
+
+                limpiarCampos();
+                
+            }else {
+                                   
+                lanzarMensaje.mostrarMessageDialog("No se pudo crear la estación, ya que el empleado con la cédula " + informacion[3] 
+                        + " ya es director de la estación " + estacion[0].getNombre(), 
+                        title, JOptionPane.ERROR_MESSAGE);               
+                            
+            }
             
         } catch (MiExcepcion ex) {
             
@@ -270,6 +288,10 @@ public class JIFCrearEstacion extends AnclarVentanaInterna {
     private javax.swing.JTextField jTFDireccionEstacion;
     private javax.swing.JTextField jTFNombreEstacion;
     // End of variables declaration//GEN-END:variables
+    private final static int WIDTH_ = 470;
+    private final static int HEIGHT_ = 220;
+    private final int parentWidth;
+    private final int parentHeight;
     private final LanzarMensaje lanzarMensaje;
     private final Validador validador;
     private final ControlEstacion controlEstacion;  

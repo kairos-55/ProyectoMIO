@@ -62,6 +62,44 @@ public class ControlEstacion extends Control {
         }
     }
     
+    public void modificarEstacion(String[] informacion) throws MiExcepcion {
+        Estacion estacion = new Estacion(Integer.parseInt(informacion[0]), informacion[1], informacion[2], informacion[3]);
+        sqlStatement = "UPDATE estacion SET "
+                + "nombre_estacion = '" + estacion.getNombre() + "', "
+                + "direccion = '" + estacion.getDireccion() + "', "
+                + "cedula_empleado = '" + estacion.getCedulaDirector() + "' "
+                + "WHERE id_estacion = '" + estacion.getId() + "';";
+        try {
+            // Realizamos la petición.
+            Request request = new Request();
+            request.setType("UPDATE");
+            request.setSqlRequest(sqlStatement);
+            Reply ok = administradorCliente.peticion(request);
+            // Verificamos que el proceso se haya realizado con exito.            
+            manejadorErrores.respuesta(ok);
+        } catch (IOException | ClassNotFoundException ex) {
+            throw new MiExcepcion("Error al modificar los datos de la estación " + estacion.getNombre().toUpperCase() + ":\n" + ex.getMessage());
+        }
+    }
+    
+    public void eliminarEstacion(String codigo) throws MiExcepcion {
+        sqlStatement = "UPDATE estacion SET "
+                + "estado_estacion = FALSE " 
+                + "WHERE id_estacion = '" + codigo + "';";
+        
+        try {
+            // Realizamos la petición.
+            Request request = new Request();
+            request.setType("UPDATE");
+            request.setSqlRequest(sqlStatement);
+            Reply ok = administradorCliente.peticion(request);
+            // Verificamos que el proceso se haya realizado con exito.            
+            manejadorErrores.respuesta(ok);
+        } catch (IOException | ClassNotFoundException ex) {
+            throw new MiExcepcion("Error al momento de eliminar la estación con código " + codigo + ":\n" + ex.getMessage());
+        }
+    }
+    
     public Estacion[] listarEstaciones() throws MiExcepcion {
         sqlStatement = "SELECT * FROM estacion WHERE estado_estacion = TRUE;";
         try {Request request = new Request();
@@ -86,6 +124,65 @@ public class ControlEstacion extends Control {
             return estacion_;
         } catch (IOException | ClassNotFoundException ex) {
             throw new MiExcepcion("Error al listar las estaciones:\n" + ex.getMessage());
+        }
+    }
+    
+    public Estacion[] yaEsDirector(String cedulaEmpleado) throws MiExcepcion {
+        sqlStatement = "SELECT * FROM estacion "
+                + "WHERE estado_estacion = TRUE AND "
+                + "cedula_empleado = '" + cedulaEmpleado + "';";
+        try {Request request = new Request();
+            request.setType("QUERY");
+            request.setSqlRequest(sqlStatement);
+            request.setColumns(5);
+            Reply ok = administradorCliente.peticion(request);
+            manejadorErrores.respuesta(ok);
+               
+            ArrayList<Object[]> estaciones = (ArrayList<Object[]>)ok.getPayload();
+            Estacion[] estacion_ = new Estacion[estaciones.size()];
+            for (int i = 0; i < estaciones.size(); i++) {
+                Object[] row = estaciones.get(i);
+                Estacion estacion = new Estacion(
+                        Integer.parseInt((String)row[0]), 
+                        (String)row[1],
+                        (String)row[2],
+                        (String)row[3]                        
+                );
+                estacion_[i] = estacion;
+            }
+            return estacion_;
+                        
+        } catch (IOException | ClassNotFoundException ex) {
+            throw new MiExcepcion("Error al buscar director existente entre las estaciones:\n" + ex.getMessage());
+        }
+    }
+    
+    public int[] dimensionColumnasTabla() throws MiExcepcion {
+        sqlStatement = "SELECT "
+                + "LENGTH(MAX(id_estacion)::text), "
+                + "MAX(LENGTH(nombre_estacion)), "
+                + "MAX(LENGTH(direccion)), "
+                + "MAX(LENGTH(cedula_empleado)) "
+                + "FROM estacion WHERE estado_estacion = TRUE;";
+        try {
+            
+            Request request = new Request();
+            request.setType("QUERY");
+            request.setSqlRequest(sqlStatement);
+            request.setColumns(4);
+            Reply ok = administradorCliente.peticion(request);
+            manejadorErrores.respuesta(ok);
+            
+            Object[] dimensiones = ((ArrayList<Object[]>)ok.getPayload()).get(0);
+            int[] dimensiones_ = new int[dimensiones.length];
+            for (int i = 0; i < dimensiones.length; i++) {
+                dimensiones_[i] = Integer.parseInt((String) dimensiones[i]);                 
+            }
+            return dimensiones_;
+        } catch (IOException | ClassNotFoundException ex) {
+            throw new MiExcepcion("Error al listar tamaños de columnas:\n" + ex.getMessage());
+        } catch (IndexOutOfBoundsException ex) {
+            throw new MiExcepcion("No hay registros de estaciones en la base de datos.");
         }
     }
     

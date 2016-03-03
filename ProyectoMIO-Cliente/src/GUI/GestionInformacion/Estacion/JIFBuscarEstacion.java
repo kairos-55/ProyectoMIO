@@ -1,7 +1,9 @@
 package GUI.GestionInformacion.Estacion;
 
+import Control.ControlEmpleado;
 import Control.ControlEstacion;
 import GUI.PaquetePrincipal.AnclarVentanaInterna;
+import Modelo.Entidades.Empleado;
 import Modelo.Entidades.Estacion;
 import Modelo.Validadores.LanzarMensaje;
 import Modelo.Excepciones.MiExcepcion;
@@ -14,11 +16,12 @@ import java.awt.event.ActionListener;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.border.EtchedBorder;
@@ -27,12 +30,10 @@ import javax.swing.border.EtchedBorder;
  *
  * JIFBuscarEstacion
  * 
- * @author Álvaro Jose Lobatón Restrepo. Código: 1130054
- * @author Jhon Jairo Pantoja. Código: 1125572
  * @author Mauricio Bernardo Dominguez Bocanegra. Código: 9927680
  * @author Martha Cecilia Holguin Tovar. Código: 1129455
  * @author Jesús Alberto Ramírez Otálvaro. Código: 1422554
- * @author Alejandro Mejia Méndez. Código: 1330785
+ * 
  */
 
 public class JIFBuscarEstacion extends AnclarVentanaInterna {
@@ -43,8 +44,7 @@ public class JIFBuscarEstacion extends AnclarVentanaInterna {
      * @param title
      * @param parentWidth
      * @param parentHeight
-     * @param username
-     * @param completeName
+     * @throws Modelo.Excepciones.MiExcepcion
      */
     public JIFBuscarEstacion(String title, int parentWidth, int parentHeight) throws MiExcepcion {
         super();
@@ -83,6 +83,7 @@ public class JIFBuscarEstacion extends AnclarVentanaInterna {
         jLControlPassword = new javax.swing.JLabel();
         jPControls = new javax.swing.JPanel();
         jPBotonBuscar = new javax.swing.JPanel();
+        jPContenedorBoton = new javax.swing.JPanel();
         jBBuscarEstacion = new javax.swing.JButton();
 
         jPInformacion.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -105,11 +106,6 @@ public class JIFBuscarEstacion extends AnclarVentanaInterna {
 
         jCBCodigoEstacion.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jCBCodigoEstacion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jCBCodigoEstacion.addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentShown(java.awt.event.ComponentEvent evt) {
-                jCBCodigoEstacionComponentShown(evt);
-            }
-        });
         jPInformacion.add(jCBCodigoEstacion);
 
         jPLabels.setLayout(new java.awt.GridLayout(3, 0));
@@ -123,6 +119,8 @@ public class JIFBuscarEstacion extends AnclarVentanaInterna {
         getContentPane().add(jPInformacion, java.awt.BorderLayout.NORTH);
 
         jPBotonBuscar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPBotonBuscar.setMaximumSize(new java.awt.Dimension(610, 37));
+        jPBotonBuscar.add(jPContenedorBoton);
 
         jBBuscarEstacion.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jBBuscarEstacion.setText("BUSCAR ESTACIÓN");
@@ -140,19 +138,16 @@ public class JIFBuscarEstacion extends AnclarVentanaInterna {
 
     private void jBBuscarEstacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarEstacionActionPerformed
         try {
+            registros = false;
             displayTab();
         } catch (MiExcepcion ex) {
             Logger.getLogger(JIFBuscarEstacion.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jBBuscarEstacionActionPerformed
 
-    private void jCBCodigoEstacionComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jCBCodigoEstacionComponentShown
-        
-    }//GEN-LAST:event_jCBCodigoEstacionComponentShown
-
     private void jTFCodigoEstacionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTFCodigoEstacionFocusLost
                     
-            if(jTFCodigoEstacion.getText()!=""){
+            /*if(jTFCodigoEstacion.getText()!=""){
                 
             String cod = jTFCodigoEstacion.getText();
             
@@ -193,7 +188,7 @@ public class JIFBuscarEstacion extends AnclarVentanaInterna {
                 
             }else{
                 jCBCodigoEstacion.setSelectedIndex(0);
-            }
+            }*/
         
     }//GEN-LAST:event_jTFCodigoEstacionFocusLost
 
@@ -201,13 +196,19 @@ public class JIFBuscarEstacion extends AnclarVentanaInterna {
         lanzarMensaje = new LanzarMensaje(this);
         manejadorEventos = new buscarEstacionManejadorEventos();
         controlEstacion = new ControlEstacion();
+        controlEmpleado = new ControlEmpleado();
         validator = new Validador();
+        registros = true;
     }
 
     private void actualizarEstaciones() throws MiExcepcion {
         Estacion[] estaciones = controlEstacion.listarEstaciones();
         if ((Arrays.asList(estaciones)).isEmpty()) {
-            throw new MiExcepcion("No hay estaciones registradas en la base de datos.");
+            
+            if(!registros){
+                dispose();
+            }
+            throw new MiExcepcion("No hay estaciones registradas en la base de datos.");            
         }
         
         String[] codigos = new String[estaciones.length+1];
@@ -223,13 +224,35 @@ public class JIFBuscarEstacion extends AnclarVentanaInterna {
         jCBCodigoEstacion.setModel(new javax.swing.DefaultComboBoxModel(codigos));
     }
     
+    private void actualizarListaEmpleados() throws MiExcepcion {
+        Empleado[] empleados = controlEmpleado.listarEmpleados();
+        if ((Arrays.asList(empleados)).isEmpty()) {
+            throw new MiExcepcion("No hay empleados registrados en la base de datos.");
+        }
+        
+        String[] cedulas = new String[empleados.length+1];
+        
+        cedulas[0] = "Seleccione la cédula del director...";
+        
+        for(int i=1; i<=empleados.length; i++){
+            
+            cedulas[i] = empleados[i-1].getCedula();
+            
+        }
+        
+        jCBCedulaDirector.setModel(new javax.swing.DefaultComboBoxModel(cedulas));
+    }
+
+    
     private void displayTab() throws MiExcepcion {
-        // Bloqueamos el boton Editar
-        //jBEditPassword.setEnabled(false);
+        // Bloqueamos el boton Buscar
+        jBBuscarEstacion.setEnabled(false);
+        jTFCodigoEstacion.setEditable(false);
+        jCBCodigoEstacion.setEnabled(false);
         // Desbloqueamos el Internal Frame     
         setLocked(false);
         // Definimos un nuevo tamaño.
-        setSize(WIDTH_, 240);
+        setSize(WIDTH_, 280);
         // Definimos el layot del panel...  
         jPUpdatePassword = new JPanel();
         jPUpdatePassword.setLayout(new BorderLayout());
@@ -251,11 +274,29 @@ public class JIFBuscarEstacion extends AnclarVentanaInterna {
         // Campos de contraseña.
         jTFNombre = new JTextField();
         jTFDireccion = new JTextField();
-        jTFCedulaDirector = new JTextField();
+        jCBCedulaDirector = new JComboBox(); 
+        
+        actualizarListaEmpleados();        
+        
         // Añadimos los campos de texto al panel
         jPUpdateTF.add(jTFNombre);
         jPUpdateTF.add(jTFDireccion);
-        jPUpdateTF.add(jTFCedulaDirector);
+        jPUpdateTF.add(jCBCedulaDirector);
+        
+        jPBotonesModificar = new JPanel();
+        jPBotonesModificar.setLayout(new FlowLayout());
+        //jPBotonesModificar.setBorder(new EtchedBorder());
+        
+        jBGuardarModificaciones = new JButton("GUARDAR MODIFICACIÓN");
+        jBGuardarModificaciones.addActionListener(manejadorEventos);
+        
+        jBCancelar = new JButton("CANCELAR");
+        jBCancelar.addActionListener(manejadorEventos);
+        
+        jPBotonesModificar.add(jBGuardarModificaciones);
+        jPBotonesModificar.add(jBCancelar);
+        
+        jPBotonesModificar.setVisible(false);
         
         String codigo = jTFCodigoEstacion.getText().trim();
         
@@ -263,31 +304,62 @@ public class JIFBuscarEstacion extends AnclarVentanaInterna {
         
         jTFNombre.setText(estacion.getNombre());
         jTFDireccion.setText(estacion.getDireccion());
-        jTFCedulaDirector.setText(estacion.getCedulaDirector());
+                
+        for(int i=1; i<=jCBCedulaDirector.getItemCount(); i++) {
+                        
+            if(estacion.getCedulaDirector().equals(jCBCedulaDirector.getItemAt(i))) {
+                jCBCedulaDirector.setSelectedIndex(i);
+                break;
+            }
+            
+        }
         
         jTFNombre.setEditable(false);
         jTFDireccion.setEditable(false);
-        jTFCedulaDirector.setEditable(false);
+        jCBCedulaDirector.setEnabled(false);
         
         // Creamos un panel para los botones
         JPanel jPUpdateButtons = new JPanel();
         //jPUpdateButtons.setLayout(new GridLayout(1, 2));
         jPUpdateButtons.setLayout(new FlowLayout());
-        jPUpdateButtons.setBorder(new EtchedBorder());
+        
+        JPanel jPBotones = new JPanel();
+        jPBotones.setLayout(new BoxLayout(jPBotones, BoxLayout.PAGE_AXIS));
+        jPBotones.setBorder(new EtchedBorder());
+        //jPBotones.setLayout(new FlowLayout());
+        //jPBotones.setLayout(new GridLayout(1, 2));
+        //jPUpdateButtons.setBorder(new EtchedBorder());
         // Creamos los botones.
-        jBSave = new JButton("SALVAR");
-        //jBSave.addActionListener(eventManager);
-        jBCancel = new JButton("CANCEL");
-        //jBCancel.addActionListener(eventManager);
+        jBModificar = new JButton("MODIFICAR");
+        jBModificar.addActionListener(manejadorEventos);
+        
+        jBEliminar = new JButton("ELIMINAR");
+        jBEliminar.addActionListener(manejadorEventos);
+        
+        jBBuscar = new JButton("BUSCAR DE NUEVO");
+        jBBuscar.addActionListener(manejadorEventos);
+        
         // Procedemos a agregar los botones al panel
-        jPUpdateButtons.add(jBSave);
-        jPUpdateButtons.add(jBCancel);
+        jPUpdateButtons.add(jBModificar);
+        jPUpdateButtons.add(jBEliminar);
+        jPUpdateButtons.add(jBBuscar);
+        
+        jPBotones.add(jPBotonesModificar);
+        jPBotones.add(jPUpdateButtons);
         // Procedemos a armar el panel completo.
         jPUpdatePassword.add(jPUpdateLabels, "Before");
         jPUpdatePassword.add(jPUpdateTF, "Center");
-        jPUpdatePassword.add(jPUpdateButtons, "Last");
+        jPUpdatePassword.add(jPBotones, "Last");
+        
+        //jPUpdatePassword.add(jPUpdateLabels, "Before");
+        //jPUpdatePassword.add(jPUpdateTF);
+        //jPUpdatePassword.add(jPBotonesModificar);
+        
+        //jPUpdatePassword.add(jPUpdateButtons, "Last");
         // Agregamos el panel ala ventana principal
-        this.add(jPUpdatePassword, "South");
+        //this.add(jPUpdatePassword, "South");
+        this.jPBotonBuscar.setLayout(new BoxLayout(jPBotonBuscar, BoxLayout.PAGE_AXIS));
+        this.jPBotonBuscar.add(jPUpdatePassword);        
         // Bloqueamos de nuevo el internal frame.
         setLocked(true);
         // Actualizamos la interfaz.
@@ -298,12 +370,17 @@ public class JIFBuscarEstacion extends AnclarVentanaInterna {
         // Limpiamos los campos.
         this.jTFNombre.setText("");
         this.jTFDireccion.setText("");
-        this.jTFCedulaDirector.setText("");
+        this.jCBCedulaDirector.setSelectedIndex(0);
+        this.jTFCodigoEstacion.setText("");
+        this.jCBCodigoEstacion.setSelectedIndex(0);
         // Debemos recoger la ventana y retirar los componentes.
         // Reactivamos el boton editar.
-        //jBEditPassword.setEnabled(true);
+        jBBuscarEstacion.setEnabled(true);
+        jTFCodigoEstacion.setEditable(true);
+        jCBCodigoEstacion.setEnabled(true);
         // Retiramos los componentes:
-        remove(jPUpdatePassword);
+        this.jPBotonBuscar.remove(jPUpdatePassword);
+        jPBotonBuscar.setLayout(new FlowLayout());
         // Desbloqueamos el internal frame para devolverlo a su tamaño original.
         setLocked(false);
         setSize(WIDTH_, HEIGHT_);
@@ -318,6 +395,7 @@ public class JIFBuscarEstacion extends AnclarVentanaInterna {
     private javax.swing.JLabel jLCodigoEstacion;
     private javax.swing.JLabel jLControlPassword;
     private javax.swing.JPanel jPBotonBuscar;
+    private javax.swing.JPanel jPContenedorBoton;
     private javax.swing.JPanel jPControls;
     private javax.swing.JPanel jPInformacion;
     private javax.swing.JPanel jPLabels;
@@ -325,19 +403,25 @@ public class JIFBuscarEstacion extends AnclarVentanaInterna {
     // End of variables declaration//GEN-END:variables
     private final int parentWidth;
     private final int parentHeight;
-    private JButton jBSave;
-    private JButton jBCancel;
+    private JButton jBModificar;
+    private JButton jBEliminar;
+    private JButton jBBuscar;
+    private JButton jBGuardarModificaciones;
+    private JButton jBCancelar;
     private JTextField jTFNombre;
     private JTextField jTFDireccion;
-    private JTextField jTFCedulaDirector;
+    private JComboBox jCBCedulaDirector;
     private JPanel jPUpdatePassword;
+    private JPanel jPBotonesModificar;
     private LanzarMensaje lanzarMensaje;
     private buscarEstacionManejadorEventos manejadorEventos;
-    private final static int WIDTH_ = 610;
+    private final static int WIDTH_ = 650;
     private final static int HEIGHT_ = 120;
     private Validador validator;
     private ControlEstacion controlEstacion;
-
+    private ControlEmpleado controlEmpleado;
+    private boolean registros;
+    
     private class buscarEstacionManejadorEventos implements ActionListener {
 
         @Override
@@ -373,6 +457,65 @@ public class JIFBuscarEstacion extends AnclarVentanaInterna {
                     jTFCodigoEstacion.setText("");
                 }          
             }
+            
+            if(e.getSource() == jBModificar){
+                
+                jPBotonesModificar.setVisible(true);
+                jBModificar.setEnabled(false);
+                jBEliminar.setEnabled(false);
+                jBBuscar.setEnabled(false);
+                
+                jTFNombre.setEditable(true);
+                jTFDireccion.setEditable(true);
+                jCBCedulaDirector.setEnabled(true);
+                
+            }
+            
+            if(e.getSource() == jBGuardarModificaciones) {
+                
+                String[] informacion = new String[4];
+                informacion[0] = jTFCodigoEstacion.getText();
+                informacion[1] = jTFNombre.getText().toUpperCase();
+                informacion[2] = jTFDireccion.getText().toUpperCase();
+                informacion[3] = (String) jCBCedulaDirector.getSelectedItem();
+                
+                try {
+                    controlEstacion.modificarEstacion(informacion);
+                    lanzarMensaje.mostrarMessageDialog("La estación ha sido modificada en la base de datos con éxito.", title, JOptionPane.INFORMATION_MESSAGE);
+                    actualizarEstaciones();
+                } catch (MiExcepcion ex) {
+                    lanzarMensaje.mostrarMessageDialog(ex.getMessage(), title, JOptionPane.ERROR_MESSAGE);
+                }
+                
+                retractTab();
+            }
+            
+            if(e.getSource() == jBCancelar || e.getSource() == jBBuscar) {
+                
+                retractTab();
+                
+            }
+            
+            if(e.getSource() == jBEliminar) {
+                
+                String codigo = jTFCodigoEstacion.getText();
+                
+                try {
+                    controlEstacion.eliminarEstacion(codigo);
+                    lanzarMensaje.mostrarMessageDialog("La estación fue eliminada con éxito.", title, JOptionPane.INFORMATION_MESSAGE);
+                    actualizarEstaciones();                    
+                } catch (MiExcepcion ex) {
+                    
+                    lanzarMensaje.mostrarMessageDialog(ex.getMessage(), title, JOptionPane.ERROR_MESSAGE);
+                    
+                } finally {
+                    
+                    retractTab();
+                    
+                }
+                
+            }
+            
         }
     }
     
