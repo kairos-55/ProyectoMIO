@@ -1,12 +1,14 @@
 package GUI.PaquetePrincipal;
 
+import Control.ControlEstacion;
 import Modelo.Validadores.LanzarMensaje;
 import Modelo.Excepciones.MiExcepcion;
 import GUI.Fondo.JPFondo;
 import GUI.FechaSistema.JPFechaSistema;
-import GUI.GestionInformacion.Empleado.JIFEmpleado;
 import GUI.GestionInformacion.Estacion.JIFBuscarEstacion;
 import GUI.GestionInformacion.Estacion.JIFCrearEstacion;
+import GUI.Reportes.Listados.JIFListaEstaciones;
+import Modelo.Entidades.Estacion;
 /*import Control.EmployeeControl;
 import Control.OfficeControl;
 import Control.UseraccountControl;
@@ -99,7 +101,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMIBMEEstacion = new javax.swing.JMenuItem();
         jMReports = new javax.swing.JMenu();
         jMListings = new javax.swing.JMenu();
-        jMIReportsUsers = new javax.swing.JMenuItem();
+        jMIListadoEstaciones = new javax.swing.JMenuItem();
         aJSEmployees = new javax.swing.JPopupMenu.Separator();
         jMIReportsEmployees = new javax.swing.JMenuItem();
         aJMIReportsEmployee_OfficeList = new javax.swing.JMenuItem();
@@ -175,13 +177,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jMListings.setText("Listados");
 
-        jMIReportsUsers.setText("Listado de Usuarios");
-        jMIReportsUsers.addActionListener(new java.awt.event.ActionListener() {
+        jMIListadoEstaciones.setText("Listado de Estaciones");
+        jMIListadoEstaciones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMIReportsUsersActionPerformed(evt);
+                jMIListadoEstacionesActionPerformed(evt);
             }
         });
-        jMListings.add(jMIReportsUsers);
+        jMListings.add(jMIListadoEstaciones);
         jMListings.add(aJSEmployees);
 
         jMIReportsEmployees.setText("Listado de Empleados");
@@ -319,22 +321,22 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }*/
     }//GEN-LAST:event_jMIReportsEmployeesActionPerformed
 
-    private void jMIReportsUsersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIReportsUsersActionPerformed
-        /*UseraccountControl control = new UseraccountControl();
-        try {
-            Useraccount[] rows = control.listUsers();
+    private void jMIListadoEstacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIListadoEstacionesActionPerformed
+        ControlEstacion controlEstacion = new ControlEstacion();
+        try{
+            Estacion[] rows = controlEstacion.listarEstaciones();
             if(rows.length == 0) {
-                throw new MyException("No hay registros de usuarios en el sistema.");
+                throw new MiExcepcion("No hay registros de estaciones.");
             }
-            int[] sizes = control.listTableSizes();
-            String[] columns = {"USERNAME", "ESTADO"};
-            JIFUseraccountsList jIFUsers = new JIFUseraccountsList("Lista de Usuarios", getSize().width, getSize().height, columns, rows, sizes, false);
-            background.add(jIFUsers);
-            jIFUsers.setVisible(true);
-        } catch (MyException ex) {
-            throwerM.displayMessageDialog(ex.getMessage(), "Lista de Usuarios", JOptionPane.ERROR_MESSAGE);
-        }*/ 
-    }//GEN-LAST:event_jMIReportsUsersActionPerformed
+            int[] dimensiones = controlEstacion.dimensionColumnasTabla();
+            String[] columnas = {"CÓDIGO", "NOMBRE", "DIRECCIÓN", "CÉDULA DIRECTOR"};
+            JIFListaEstaciones jIFEstaciones = new JIFListaEstaciones("Lista de Estaciones", getSize().width, getSize().height, columnas, rows, dimensiones, false);
+            fondo.add(jIFEstaciones);
+            jIFEstaciones.setVisible(true);
+        } catch(MiExcepcion e) {
+            lanzarMensaje.mostrarMessageDialog(e.getMessage(), "Lista de Estaciones", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jMIListadoEstacionesActionPerformed
 
     private void jMICrearEstacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMICrearEstacionActionPerformed
         try {
@@ -342,7 +344,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             fondo.add(internalFrame);
             internalFrame.setVisible(true);
         } catch (MiExcepcion ex) {
-            throwerM.mostrarMessageDialog(ex.getMessage(), "Crear Estación", JOptionPane.ERROR_MESSAGE);
+            lanzarMensaje.mostrarMessageDialog(ex.getMessage(), "Crear Estación", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jMICrearEstacionActionPerformed
 
@@ -435,7 +437,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             fondo.add(internalFrame);
             internalFrame.setVisible(true);
         } catch (MiExcepcion ex) {
-            throwerM.mostrarMessageDialog(ex.getMessage(), "Buscar Estación", JOptionPane.ERROR_MESSAGE);
+            lanzarMensaje.mostrarMessageDialog(ex.getMessage(), "Buscar Estación", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jMIBMEEstacionActionPerformed
    
@@ -460,7 +462,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
      */
     private void initializeComponents() {
         // LANZADOR DE MENSAJES.
-        throwerM = new LanzarMensaje(this);
+        lanzarMensaje = new LanzarMensaje(this);
         /*
         // PANEL DE ACCESO AL SISTEMA.
         // A este punto se gestiona la preparación del primer uso de la aplicación.
@@ -531,7 +533,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         setEnabledMenuItems(true);
         jMBMenu.add(jMFile);        
         jMBMenu.add(jMReports);
-        jMIReportsUsers.setEnabled(false);
+        jMIListadoEstaciones.setEnabled(false);
         jMBMenu.add(jMHelp); 
     }
     
@@ -541,7 +543,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMBMenu.add(jMFile);
         jMBMenu.add(jMReports);
         jMIReportsEmployees.setEnabled(false);        
-        jMIReportsUsers.setEnabled(false);
+        jMIListadoEstaciones.setEnabled(false);
         jMBMenu.add(jMHelp);
     }
 
@@ -551,7 +553,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMBMenu.add(jMFile);
         jMBMenu.add(jMReports);
         jMIReportsEmployees.setEnabled(false);        
-        jMIReportsUsers.setEnabled(false);
+        jMIListadoEstaciones.setEnabled(false);
         jMBMenu.add(jMHelp);
     }
     
@@ -564,7 +566,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMICrearEstacion.setEnabled(bool);
         jMIReportsEmployees.setEnabled(bool);
         jMIReportsOffices.setEnabled(bool);
-        jMIReportsUsers.setEnabled(bool);
+        jMIListadoEstaciones.setEnabled(bool);
     }    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem aJMIReportsEmployee_OfficeList;
@@ -581,12 +583,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMIFileClose;
     private javax.swing.JMenuItem jMIFileLogout;
     private javax.swing.JMenuItem jMIFileViewProfile;
+    private javax.swing.JMenuItem jMIListadoEstaciones;
     private javax.swing.JMenuItem jMIPaymentReceipt;
     private javax.swing.JMenuItem jMIPayroll;
     private javax.swing.JMenu jMIPayrollReports;
     private javax.swing.JMenuItem jMIReportsEmployees;
     private javax.swing.JMenuItem jMIReportsOffices;
-    private javax.swing.JMenuItem jMIReportsUsers;
     private javax.swing.JMenu jMListings;
     private javax.swing.JMenu jMParametrization;
     private javax.swing.JMenu jMReports;
@@ -598,7 +600,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private final static String LOOKANDFEEL = "Nimbus";
     // ATRIBUTOS PRIVADOS DE LA CLASE.
     private Container container;
-    private LanzarMensaje throwerM;
+    private LanzarMensaje lanzarMensaje;
     
     // ACCESO AL SISTEMA.
     //private JPLogin jPLoginPanel; 

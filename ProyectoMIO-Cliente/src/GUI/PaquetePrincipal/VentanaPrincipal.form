@@ -86,12 +86,12 @@
                 <Property name="text" type="java.lang.String" value="Listados"/>
               </Properties>
               <SubComponents>
-                <MenuItem class="javax.swing.JMenuItem" name="jMIReportsUsers">
+                <MenuItem class="javax.swing.JMenuItem" name="jMIListadoEstaciones">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Listado de Usuarios"/>
+                    <Property name="text" type="java.lang.String" value="Listado de Estaciones"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMIReportsUsersActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMIListadoEstacionesActionPerformed"/>
                   </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JPopupMenu$Separator" name="aJSEmployees">
