@@ -247,7 +247,7 @@ public class JIFCrearEstacion extends AnclarVentanaInterna {
             validador.validarCampoVacio(informacion[2], "DIRECCIÓN");
             validador.validarCampoVacio(informacion[3], "CÉDULA DIRECTOR");
             
-            //validador.validarInteger(informacion[0]);
+            validador.validarCadenaNumeros(informacion[0]);
             
             Estacion[] estacion = controlEstacion.yaEsDirector(informacion[3]);
             

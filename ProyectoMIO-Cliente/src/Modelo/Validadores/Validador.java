@@ -117,18 +117,14 @@ public class Validador {
     * @throws MyException
     */
     
-    public void validarNumeroTelefonico(String numeroTelefonico)throws MiExcepcion{
+    public void validarCadenaNumeros(String cadena)throws MiExcepcion{
         
-        boolean validarNumero = numeroTelefonico.matches("[0-9]*");
-        int longitud = numeroTelefonico.length();
-        if (validarNumero) {
-            if ( longitud != 7 && longitud != 0 && longitud != 10) {
-            throw new MiExcepcion ("El número de teléfono debe tener 7 o 10 dígitos. ");
-            }
-        }else{
-            throw new MiExcepcion ("El teléfono debe ser de solo números.");
-        }
-                    
+        boolean validarCadena = cadena.matches("[0-9]*");
+        
+        if(!validarCadena) {
+            throw new MiExcepcion ("El código de la estación debe ser de solo números.");
+        }         
+                            
     }
 
-}
+}   
