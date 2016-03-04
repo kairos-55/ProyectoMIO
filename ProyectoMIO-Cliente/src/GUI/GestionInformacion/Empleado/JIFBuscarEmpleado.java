@@ -144,6 +144,7 @@ public class JIFBuscarEmpleado extends AnclarVentanaInterna {
 
     private void jBBuscarCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarCedulaActionPerformed
         try {
+            registros = false;
             displayTab();
         } catch (MiExcepcion ex) {
             Logger.getLogger(JIFBuscarEmpleado.class.getName()).log(Level.SEVERE, null, ex);
@@ -163,11 +164,17 @@ public class JIFBuscarEmpleado extends AnclarVentanaInterna {
         manejadorEventos = new buscarEmpleadoManejadorEventos();
         controlEmpleado = new ControlEmpleado();
         validador = new Validador();
+        registros = true;
     }
 
     private void actualizarEmpleados() throws MiExcepcion {
         Empleado[] empleados = controlEmpleado.listarEmpleados();
         if ((Arrays.asList(empleados)).isEmpty()) {
+            
+            if(!registros){
+                dispose();
+            }
+            
             throw new MiExcepcion("No hay empleados registrados en la base de datos.");
         }
         
@@ -408,6 +415,7 @@ public class JIFBuscarEmpleado extends AnclarVentanaInterna {
     private final static int HEIGHT_ = 120;
     private Validador validador;
     private ControlEmpleado controlEmpleado;
+    private boolean registros;
 
     private class buscarEmpleadoManejadorEventos implements ActionListener {
 
@@ -505,6 +513,7 @@ public class JIFBuscarEmpleado extends AnclarVentanaInterna {
             if(!error) {
                     controlEmpleado.modificarEmpleado(arregloEmpleado);
                     lanzarMensaje.mostrarMessageDialog("Los datos del empleado fueron modificados con éxito", title, WIDTH);
+                    actualizarEmpleados();
                     retractTab();           
             }
                     

@@ -12,6 +12,8 @@ import GUI.GestionInformacion.Empleado.JIFBuscarEmpleado;
 import GUI.GestionInformacion.Empleado.JIFCrearEmpleado;
 import GUI.GestionInformacion.Estacion.JIFBuscarEstacion;
 import GUI.GestionInformacion.Estacion.JIFCrearEstacion;
+import GUI.GestionInformacion.Ruta.JIFBuscarRuta;
+import GUI.GestionInformacion.Ruta.JIFCrearRuta;
 import GUI.Reportes.Listados.JIFListaEmpleados;
 import GUI.Reportes.Listados.JIFListaEstaciones;
 import Modelo.Entidades.Empleado;
@@ -81,6 +83,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMGestionInformacionEstacion = new javax.swing.JMenu();
         jMICrearEstacion = new javax.swing.JMenuItem();
         jMIBMEEstacion = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
         jMGestionInformacionBus = new javax.swing.JMenu();
         jMICrearBus = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -89,14 +94,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMIListadoEstaciones = new javax.swing.JMenuItem();
         jMIReportsEmployees = new javax.swing.JMenuItem();
         aJSEmployees = new javax.swing.JPopupMenu.Separator();
-        aJMIReportsEmployee_OfficeList = new javax.swing.JMenuItem();
         aJSOffices = new javax.swing.JPopupMenu.Separator();
-        jMIReportsOffices = new javax.swing.JMenuItem();
-        jMIPayrollReports = new javax.swing.JMenu();
-        jMIPayroll = new javax.swing.JMenuItem();
-        jMIPaymentReceipt = new javax.swing.JMenuItem();
-        jMGraphics = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
         jMHelp = new javax.swing.JMenu();
         jMIAbout = new javax.swing.JMenuItem();
 
@@ -176,6 +174,26 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jMParametrization.add(jMGestionInformacionEstacion);
 
+        jMenu2.setText("Rutas");
+
+        jMenuItem1.setText("Crear");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem1);
+
+        jMenuItem5.setText("Buscar, Modificar y Eliminar");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem5);
+
+        jMParametrization.add(jMenu2);
+
         jMGestionInformacionBus.setText("Buses");
 
         jMICrearBus.setText("Crear");
@@ -218,57 +236,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         jMListings.add(jMIReportsEmployees);
         jMListings.add(aJSEmployees);
-
-        aJMIReportsEmployee_OfficeList.setText("Listado de Empleados por Sede");
-        aJMIReportsEmployee_OfficeList.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                aJMIReportsEmployee_OfficeListActionPerformed(evt);
-            }
-        });
-        jMListings.add(aJMIReportsEmployee_OfficeList);
         jMListings.add(aJSOffices);
 
-        jMIReportsOffices.setText("Listado de Sedes");
-        jMIReportsOffices.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMIReportsOfficesActionPerformed(evt);
-            }
-        });
-        jMListings.add(jMIReportsOffices);
-
         jMReports.add(jMListings);
-
-        jMIPayrollReports.setText("Nomina");
-
-        jMIPayroll.setText("Desprendible de Nomina");
-        jMIPayroll.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMIPayrollActionPerformed(evt);
-            }
-        });
-        jMIPayrollReports.add(jMIPayroll);
-
-        jMIPaymentReceipt.setText("Desprendible de Pago para un Empleado");
-        jMIPaymentReceipt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMIPaymentReceiptActionPerformed(evt);
-            }
-        });
-        jMIPayrollReports.add(jMIPaymentReceipt);
-
-        jMReports.add(jMIPayrollReports);
-
-        jMGraphics.setText("Graficos");
-
-        jMenuItem1.setText("Sueldo de Empleados por Periodo");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        jMGraphics.add(jMenuItem1);
-
-        jMReports.add(jMGraphics);
 
         jMBMenu.add(jMReports);
 
@@ -327,40 +297,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         internalFrame.setVisible(true);*/
     }//GEN-LAST:event_jMIFileViewProfileActionPerformed
 
-    private void jMIReportsEmployeesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIReportsEmployeesActionPerformed
-        ControlEmpleado controlEmpleado = new ControlEmpleado();
-        try{
-            Empleado[] rows = controlEmpleado.listarEmpleados();
-            if(rows.length == 0) {
-                throw new MiExcepcion("No hay registros de empleados.");
-            }
-            int[] dimensiones = controlEmpleado.dimensionColumnasTabla();
-            String[] columnas = {"CÉDULA", "NOMBRE(S)", "APELLIDO(S)", "TELÉFONO", "FECHA DE NACIMIENTO", "ESTADO CIVIL", "CARGO", "SALARIO"};
-            JIFListaEmpleados jIFEmpleados = new JIFListaEmpleados("Lista de Empleados", getSize().width, getSize().height, columnas, rows, dimensiones, false);
-            fondo.add(jIFEmpleados);
-            jIFEmpleados.setVisible(true);
-        } catch(MiExcepcion e) {
-            lanzarMensaje.mostrarMessageDialog(e.getMessage(), "Lista de Empleados", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_jMIReportsEmployeesActionPerformed
-
-    private void jMIListadoEstacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIListadoEstacionesActionPerformed
-        ControlEstacion controlEstacion = new ControlEstacion();
-        try{
-            Estacion[] rows = controlEstacion.listarEstaciones();
-            if(rows.length == 0) {
-                throw new MiExcepcion("No hay registros de estaciones.");
-            }
-            int[] dimensiones = controlEstacion.dimensionColumnasTabla();
-            String[] columnas = {"CÓDIGO", "NOMBRE", "DIRECCIÓN", "CÉDULA DIRECTOR"};
-            JIFListaEstaciones jIFEstaciones = new JIFListaEstaciones("Lista de Estaciones", getSize().width, getSize().height, columnas, rows, dimensiones, false);
-            fondo.add(jIFEstaciones);
-            jIFEstaciones.setVisible(true);
-        } catch(MiExcepcion e) {
-            lanzarMensaje.mostrarMessageDialog(e.getMessage(), "Lista de Estaciones", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_jMIListadoEstacionesActionPerformed
-
     private void jMICrearEstacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMICrearEstacionActionPerformed
         try {
             JIFCrearEstacion internalFrame = new JIFCrearEstacion("Nueva Estación", (int) getSize().width, (int) getSize().height);
@@ -370,89 +306,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             lanzarMensaje.mostrarMessageDialog(ex.getMessage(), "Crear Estación", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jMICrearEstacionActionPerformed
-
-    private void jMIReportsOfficesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIReportsOfficesActionPerformed
-        /*OfficeControl control = new OfficeControl(); 
-        try {                       
-            Office[] rows = control.listOffices();
-            if(rows.length == 0) {
-                throw new MyException("No hay registros de sedes en el sistema.");
-            }
-            int[] sizes = control.listTableSizes();
-            String[] columns = {"CÓDIGO", "NOMBRE", "ESTADO", "CIUDAD", "DIRECCIÓN", "TELÉFONO"};
-            JIFOfficesList jIFOffices = new JIFOfficesList("Lista de Sedes", getSize().width, getSize().height, columns, rows, sizes, false);
-            background.add(jIFOffices);
-            jIFOffices.setVisible(true);
-        } catch (MyException ex) {
-            throwerM.displayMessageDialog(ex.getMessage(), "Lista de Sedes", JOptionPane.ERROR_MESSAGE);
-        }*/
-    }//GEN-LAST:event_jMIReportsOfficesActionPerformed
-
-    private void aJMIReportsEmployee_OfficeListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aJMIReportsEmployee_OfficeListActionPerformed
-        /*String title = "Lista de Empleados por Sede";
-        EmployeeControl eControl = new EmployeeControl();
-        OfficeControl oControl = new OfficeControl();
-        try{
-            Office[] offices = oControl.listOffices();
-            if(offices.length == 0) throw new MyException("No hay registros para sedes en el sistema.");
-            Vector offices_ = new Vector();
-            offices_.add(" ");
-            offices_.addAll(Arrays.asList(offices));
-            JComboBox jCBCode = new JComboBox();
-            jCBCode.setModel(new javax.swing.DefaultComboBoxModel(offices_));
-            
-            Office office = (Office) throwerM.displayJComboDialog("Selecciona una sede: ", jCBCode, title);
-            String office_code = office.getCode();
-            Employee[] rows = eControl.listEmployees(office_code);
-            if(rows.length == 0) {
-                throw new MyException("No hay registros de empleados para la sede " + office + ".");
-            }
-            int[] sizes = eControl.listTableSizes();
-            String[] columns = {"IDENTIFICACIÓN", "NOMBRE COMPLETO", "PRIMER APELLIDO", "SEGUNDO APELLIDO", "ESTADO", "CARGO",
-                "DIRECCIÓN", "CIUDAD", "GENERO", "ESTADO CIVIL", "FECHA DE NACIMIENTO", "LUGAR DE NACIMIENTO",
-                "TELÉFONO","E-MAIL"};
-            JIFEmployeeList jIFEmployees = new JIFEmployeeList(title, getSize().width, getSize().height, columns, rows, sizes, false);
-            background.add(jIFEmployees);
-            jIFEmployees.setVisible(true);
-        } catch(MyException e) {
-            throwerM.displayMessageDialog(e.getMessage(), title, JOptionPane.ERROR_MESSAGE);
-        } catch (Exception e) {
-            throwerM.displayMessageDialog("Debes seleccionar una sede.", title, JOptionPane.ERROR_MESSAGE);
-        }*/
-    }//GEN-LAST:event_aJMIReportsEmployee_OfficeListActionPerformed
-
-    private void jMIPaymentReceiptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIPaymentReceiptActionPerformed
-        /*String title = "Generar Desprendible de Pago para un Empleado.";
-        try {
-            JIFPaymentReceipt internalFrame = new JIFPaymentReceipt(title, (int) getSize().width, (int) getSize().height);
-            background.add(internalFrame);
-            internalFrame.setVisible(true);
-        } catch (MyException ex) {
-            throwerM.displayMessageDialog(ex.getMessage(), title, JOptionPane.ERROR_MESSAGE);
-        }*/
-    }//GEN-LAST:event_jMIPaymentReceiptActionPerformed
-
-    private void jMIPayrollActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIPayrollActionPerformed
-        /*String title = "Generar Desprendible de Nomina.";
-        try {
-            JIFPaycheck internalFrame = new JIFPaycheck(title, (int) getSize().width, (int) getSize().height);
-            background.add(internalFrame);
-            internalFrame.setVisible(true);
-        } catch (MyException ex) {
-            throwerM.displayMessageDialog(ex.getMessage(), title, JOptionPane.ERROR_MESSAGE);
-        }*/
-    }//GEN-LAST:event_jMIPayrollActionPerformed
-
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        /*String title = "Sueldo Empleados por Periodo de Pago.";
-        try {
-            JIFGraphicsEmployeesPayrollPeriod internalFrame = new JIFGraphicsEmployeesPayrollPeriod(title, (int) getSize().width, (int) getSize().height);
-            background.add(internalFrame);
-            internalFrame.setVisible(true);
-        } catch (MyException ex) {
-            throwerM.displayMessageDialog(ex.getMessage(), title, JOptionPane.ERROR_MESSAGE);
-        }*/
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMIBMEEstacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIBMEEstacionActionPerformed
         try {
@@ -499,6 +352,60 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             lanzarMensaje.mostrarMessageDialog(ex.getMessage(), "Buscar Empleado", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMIReportsEmployeesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIReportsEmployeesActionPerformed
+        ControlEmpleado controlEmpleado = new ControlEmpleado();
+        try{
+            Empleado[] rows = controlEmpleado.listarEmpleados();
+            if(rows.length == 0) {
+                throw new MiExcepcion("No hay registros de empleados.");
+            }
+            int[] dimensiones = controlEmpleado.dimensionColumnasTabla();
+            String[] columnas = {"CÉDULA", "NOMBRE(S)", "APELLIDO(S)", "TELÉFONO", "FECHA DE NACIMIENTO", "ESTADO CIVIL", "CARGO", "SALARIO"};
+            JIFListaEmpleados jIFEmpleados = new JIFListaEmpleados("Lista de Empleados", getSize().width, getSize().height, columnas, rows, dimensiones, false);
+            fondo.add(jIFEmpleados);
+            jIFEmpleados.setVisible(true);
+        } catch(MiExcepcion e) {
+            lanzarMensaje.mostrarMessageDialog(e.getMessage(), "Lista de Empleados", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jMIReportsEmployeesActionPerformed
+
+    private void jMIListadoEstacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIListadoEstacionesActionPerformed
+        ControlEstacion controlEstacion = new ControlEstacion();
+        try{
+            Estacion[] rows = controlEstacion.listarEstaciones();
+            if(rows.length == 0) {
+                throw new MiExcepcion("No hay registros de estaciones.");
+            }
+            int[] dimensiones = controlEstacion.dimensionColumnasTabla();
+            String[] columnas = {"CÓDIGO", "NOMBRE", "DIRECCIÓN", "CÉDULA DIRECTOR"};
+            JIFListaEstaciones jIFEstaciones = new JIFListaEstaciones("Lista de Estaciones", getSize().width, getSize().height, columnas, rows, dimensiones, false);
+            fondo.add(jIFEstaciones);
+            jIFEstaciones.setVisible(true);
+        } catch(MiExcepcion e) {
+            lanzarMensaje.mostrarMessageDialog(e.getMessage(), "Lista de Estaciones", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jMIListadoEstacionesActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        try {
+            JIFCrearRuta internalFrame = new JIFCrearRuta("Nueva Ruta", (int) getSize().width, (int) getSize().height);
+            fondo.add(internalFrame);
+            internalFrame.setVisible(true);
+        } catch (MiExcepcion ex) {
+            lanzarMensaje.mostrarMessageDialog(ex.getMessage(), "Crear Ruta", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        try {
+            JIFBuscarRuta internalFrame = new JIFBuscarRuta("Gestión de Rutas", (int) getSize().width, (int) getSize().height);
+            fondo.add(internalFrame);
+            internalFrame.setVisible(true);
+        } catch (MiExcepcion ex) {
+            lanzarMensaje.mostrarMessageDialog(ex.getMessage(), "Buscar Ruta", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
    
     /**
      * setAppearance Metodo encargado de poner el Look And Feel del Frame.
@@ -624,18 +531,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMGestionInformacionEstacion.setEnabled(bool);       
         jMICrearEstacion.setEnabled(bool);
         jMIReportsEmployees.setEnabled(bool);
-        jMIReportsOffices.setEnabled(bool);
         jMIListadoEstaciones.setEnabled(bool);
     }    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem aJMIReportsEmployee_OfficeList;
     private javax.swing.JPopupMenu.Separator aJSEmployees;
     private javax.swing.JPopupMenu.Separator aJSOffices;
     private javax.swing.JMenuBar jMBMenu;
     private javax.swing.JMenu jMFile;
     private javax.swing.JMenu jMGestionInformacionBus;
     private javax.swing.JMenu jMGestionInformacionEstacion;
-    private javax.swing.JMenu jMGraphics;
     private javax.swing.JMenu jMHelp;
     private javax.swing.JMenuItem jMIAbout;
     private javax.swing.JMenuItem jMIBMEEstacion;
@@ -645,19 +549,17 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMIFileLogout;
     private javax.swing.JMenuItem jMIFileViewProfile;
     private javax.swing.JMenuItem jMIListadoEstaciones;
-    private javax.swing.JMenuItem jMIPaymentReceipt;
-    private javax.swing.JMenuItem jMIPayroll;
-    private javax.swing.JMenu jMIPayrollReports;
     private javax.swing.JMenuItem jMIReportsEmployees;
-    private javax.swing.JMenuItem jMIReportsOffices;
     private javax.swing.JMenu jMListings;
     private javax.swing.JMenu jMParametrization;
     private javax.swing.JMenu jMReports;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPopupMenu.Separator jSFile01;
     private javax.swing.JPopupMenu.Separator jSParametrization01;
     // End of variables declaration//GEN-END:variables
