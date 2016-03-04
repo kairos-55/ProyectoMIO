@@ -245,9 +245,14 @@ public class JIFCrearEstacion extends AnclarVentanaInterna {
             validador.validarCampoVacio(informacion[0], "CÓDIGO");
             validador.validarCampoVacio(informacion[1], "NOMBRE");
             validador.validarCampoVacio(informacion[2], "DIRECCIÓN");
-            validador.validarCampoVacio(informacion[3], "CÉDULA DIRECTOR");
+                        
+            validador.validarCadenaNumeros(informacion[0], "El CÓDIGO DE LA ESTACIÓN ");
             
-            validador.validarCadenaNumeros(informacion[0]);
+            if(jCBCedulaDirector.getSelectedItem()==jCBCedulaDirector.getItemAt(0)) {
+                
+                lanzarMensaje.mostrarMessageDialog("Debe seleccionar la cédula del director.", title, JOptionPane.INFORMATION_MESSAGE); 
+                
+            } else {
             
             Estacion[] estacion = controlEstacion.yaEsDirector(informacion[3]);
             
@@ -265,6 +270,7 @@ public class JIFCrearEstacion extends AnclarVentanaInterna {
                         + " ya es director de la estación " + estacion[0].getNombre(), 
                         title, JOptionPane.ERROR_MESSAGE);               
                             
+            }
             }
             
         } catch (MiExcepcion ex) {
