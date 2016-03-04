@@ -497,7 +497,7 @@ public class JIFBuscarEstacion extends AnclarVentanaInterna {
                         controlEstacion.modificarEstacion(informacion);
                         lanzarMensaje.mostrarMessageDialog("La estación ha sido modificada en la base de datos con éxito.", title, JOptionPane.INFORMATION_MESSAGE);
                         actualizarEstaciones();
-
+                        retractTab();
                     }else {
 
                         lanzarMensaje.mostrarMessageDialog("No se pudo modificar la estación, ya que el empleado con la cédula " + informacion[3] 
@@ -509,9 +509,8 @@ public class JIFBuscarEstacion extends AnclarVentanaInterna {
                     
                 } catch (MiExcepcion ex) {
                     lanzarMensaje.mostrarMessageDialog(ex.getMessage(), title, JOptionPane.ERROR_MESSAGE);
-                }
+                }               
                 
-                retractTab();
             }
             
             if(e.getSource() == jBCancelar || e.getSource() == jBBuscar) {

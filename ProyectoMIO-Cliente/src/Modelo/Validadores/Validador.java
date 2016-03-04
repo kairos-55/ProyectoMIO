@@ -71,8 +71,15 @@ public class Validador {
         int integer = Integer.parseInt(dato);
     }
     
-    public void validarDouble (String dato) throws NumberFormatException {
+    public void validarDouble (String dato, String campo) throws MiExcepcion {
+        try{
+        
         double doubleDato = Double.parseDouble(dato);
+        
+        }catch(NumberFormatException ex){
+            throw new MiExcepcion (campo + " debe ser un valor numérico.");
+        }
+        
     }
 
     /**
@@ -127,6 +134,22 @@ public class Validador {
             throw new MiExcepcion (campo + " debe ser de solo números.");
         }         
                             
+    }
+    
+    public void validarNumeroTelefonico(String numeroTelefonico)throws MiExcepcion{
+                
+        boolean validarCadena = numeroTelefonico.matches("[0-9]*");
+        
+        int length = numeroTelefonico.length();
+        
+        if (validarCadena) {
+            if ( length != 7 && length != 0 && length != 10) {
+            throw new MiExcepcion ("El número de teléfono debe tener 7 o 10 dígitos. ");
+            }
+        }else{
+            throw new MiExcepcion ("El teléfono debe ser de solo números.");
+        }
+                    
     }
 
 }   

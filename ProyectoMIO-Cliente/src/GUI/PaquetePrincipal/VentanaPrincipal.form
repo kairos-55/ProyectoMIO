@@ -51,6 +51,29 @@
           <SubComponents>
             <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSParametrization01">
             </MenuItem>
+            <Menu class="javax.swing.JMenu" name="jMenu1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Empleados"/>
+              </Properties>
+              <SubComponents>
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem3">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Crear"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem3ActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem4">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Buscar, Modificar y Eliminar"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem4ActionPerformed"/>
+                  </Events>
+                </MenuItem>
+              </SubComponents>
+            </Menu>
             <Menu class="javax.swing.JMenu" name="jMGestionInformacionEstacion">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Estaciones"/>
@@ -117,8 +140,6 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMIListadoEstacionesActionPerformed"/>
                   </Events>
                 </MenuItem>
-                <MenuItem class="javax.swing.JPopupMenu$Separator" name="aJSEmployees">
-                </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="jMIReportsEmployees">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Listado de Empleados"/>
@@ -126,6 +147,8 @@
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMIReportsEmployeesActionPerformed"/>
                   </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JPopupMenu$Separator" name="aJSEmployees">
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="aJMIReportsEmployee_OfficeList">
                   <Properties>

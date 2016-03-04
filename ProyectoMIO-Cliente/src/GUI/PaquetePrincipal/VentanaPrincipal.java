@@ -1,5 +1,6 @@
 package GUI.PaquetePrincipal;
 
+import Control.ControlEmpleado;
 import Control.ControlEstacion;
 import Modelo.Validadores.LanzarMensaje;
 import Modelo.Excepciones.MiExcepcion;
@@ -7,9 +8,13 @@ import GUI.Fondo.JPFondo;
 import GUI.FechaSistema.JPFechaSistema;
 import GUI.GestionInformacion.Bus.JIFBuscarBus;
 import GUI.GestionInformacion.Bus.JIFCrearBus;
+import GUI.GestionInformacion.Empleado.JIFBuscarEmpleado;
+import GUI.GestionInformacion.Empleado.JIFCrearEmpleado;
 import GUI.GestionInformacion.Estacion.JIFBuscarEstacion;
 import GUI.GestionInformacion.Estacion.JIFCrearEstacion;
+import GUI.Reportes.Listados.JIFListaEmpleados;
 import GUI.Reportes.Listados.JIFListaEstaciones;
+import Modelo.Entidades.Empleado;
 import Modelo.Entidades.Estacion;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -70,6 +75,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMIFileClose = new javax.swing.JMenuItem();
         jMParametrization = new javax.swing.JMenu();
         jSParametrization01 = new javax.swing.JPopupMenu.Separator();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jMGestionInformacionEstacion = new javax.swing.JMenu();
         jMICrearEstacion = new javax.swing.JMenuItem();
         jMIBMEEstacion = new javax.swing.JMenuItem();
@@ -79,8 +87,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMReports = new javax.swing.JMenu();
         jMListings = new javax.swing.JMenu();
         jMIListadoEstaciones = new javax.swing.JMenuItem();
-        aJSEmployees = new javax.swing.JPopupMenu.Separator();
         jMIReportsEmployees = new javax.swing.JMenuItem();
+        aJSEmployees = new javax.swing.JPopupMenu.Separator();
         aJMIReportsEmployee_OfficeList = new javax.swing.JMenuItem();
         aJSOffices = new javax.swing.JPopupMenu.Separator();
         jMIReportsOffices = new javax.swing.JMenuItem();
@@ -127,6 +135,26 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jMParametrization.setText("GESTIÓN DE INFORMACIÓN");
         jMParametrization.add(jSParametrization01);
+
+        jMenu1.setText("Empleados");
+
+        jMenuItem3.setText("Crear");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem3);
+
+        jMenuItem4.setText("Buscar, Modificar y Eliminar");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem4);
+
+        jMParametrization.add(jMenu1);
 
         jMGestionInformacionEstacion.setText("Estaciones");
 
@@ -181,7 +209,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
         jMListings.add(jMIListadoEstaciones);
-        jMListings.add(aJSEmployees);
 
         jMIReportsEmployees.setText("Listado de Empleados");
         jMIReportsEmployees.addActionListener(new java.awt.event.ActionListener() {
@@ -190,6 +217,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
         jMListings.add(jMIReportsEmployees);
+        jMListings.add(aJSEmployees);
 
         aJMIReportsEmployee_OfficeList.setText("Listado de Empleados por Sede");
         aJMIReportsEmployee_OfficeList.addActionListener(new java.awt.event.ActionListener() {
@@ -300,22 +328,20 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMIFileViewProfileActionPerformed
 
     private void jMIReportsEmployeesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIReportsEmployeesActionPerformed
-        /*EmployeeControl eControl = new EmployeeControl();
+        ControlEmpleado controlEmpleado = new ControlEmpleado();
         try{
-            Employee[] rows = eControl.listEmployees();
+            Empleado[] rows = controlEmpleado.listarEmpleados();
             if(rows.length == 0) {
-                throw new MyException("No hay registros de empleados.");
+                throw new MiExcepcion("No hay registros de empleados.");
             }
-            int[] sizes = eControl.listTableSizes();
-            String[] columns = {"IDENTIFICACIÓN", "NOMBRE COMPLETO", "PRIMER APELLIDO", "SEGUNDO APELLIDO", "ESTADO", "CARGO",
-                "DIRECCIÓN", "CIUDAD", "GENERO", "ESTADO CIVIL", "FECHA DE NACIMIENTO", "LUGAR DE NACIMIENTO",
-                "TELÉFONO","E-MAIL"};
-            JIFEmployeeList jIFEmployees = new JIFEmployeeList("Lista de Empleados", getSize().width, getSize().height, columns, rows, sizes, false);
-            background.add(jIFEmployees);
-            jIFEmployees.setVisible(true);
-        } catch(MyException e) {
-            throwerM.displayMessageDialog(e.getMessage(), "Lista de Empleados", JOptionPane.ERROR_MESSAGE);
-        }*/
+            int[] dimensiones = controlEmpleado.dimensionColumnasTabla();
+            String[] columnas = {"CÉDULA", "NOMBRE(S)", "APELLIDO(S)", "TELÉFONO", "FECHA DE NACIMIENTO", "ESTADO CIVIL", "CARGO", "SALARIO"};
+            JIFListaEmpleados jIFEmpleados = new JIFListaEmpleados("Lista de Empleados", getSize().width, getSize().height, columnas, rows, dimensiones, false);
+            fondo.add(jIFEmpleados);
+            jIFEmpleados.setVisible(true);
+        } catch(MiExcepcion e) {
+            lanzarMensaje.mostrarMessageDialog(e.getMessage(), "Lista de Empleados", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jMIReportsEmployeesActionPerformed
 
     private void jMIListadoEstacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIListadoEstacionesActionPerformed
@@ -457,6 +483,22 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             lanzarMensaje.mostrarMessageDialog(ex.getMessage(), "Buscar Bus", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        JIFCrearEmpleado internalFrame = new JIFCrearEmpleado("Crear Empleado", (int) getSize().width, (int) getSize().height);
+        fondo.add(internalFrame);
+        internalFrame.setVisible(true);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        try {
+            JIFBuscarEmpleado internalFrame = new JIFBuscarEmpleado("Buscar Empleado", (int) getSize().width, (int) getSize().height);
+            fondo.add(internalFrame);
+            internalFrame.setVisible(true);
+        } catch (MiExcepcion ex) {
+            lanzarMensaje.mostrarMessageDialog(ex.getMessage(), "Buscar Empleado", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
    
     /**
      * setAppearance Metodo encargado de poner el Look And Feel del Frame.
@@ -611,8 +653,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMListings;
     private javax.swing.JMenu jMParametrization;
     private javax.swing.JMenu jMReports;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPopupMenu.Separator jSFile01;
     private javax.swing.JPopupMenu.Separator jSParametrization01;
     // End of variables declaration//GEN-END:variables

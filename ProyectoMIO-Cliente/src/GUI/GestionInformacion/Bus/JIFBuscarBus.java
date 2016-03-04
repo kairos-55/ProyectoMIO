@@ -473,14 +473,13 @@ public class JIFBuscarBus extends AnclarVentanaInterna {
                         controlBus.modificarBus(informacion);
                         lanzarMensaje.mostrarMessageDialog("El bus ha sido modificado en la base de datos con éxito.", title, JOptionPane.INFORMATION_MESSAGE);
                         actualizarBuses();                                             
-
+                        retractTab();
                     }
             
                 } catch (MiExcepcion ex) {
                     lanzarMensaje.mostrarMessageDialog(ex.getMessage(), title, JOptionPane.ERROR_MESSAGE);
-                }
+                }              
                 
-                retractTab();
             }
             
             if(e.getSource() == jBCancelar || e.getSource() == jBBuscar) {
