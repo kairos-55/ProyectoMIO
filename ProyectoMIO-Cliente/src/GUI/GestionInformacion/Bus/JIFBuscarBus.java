@@ -1,10 +1,8 @@
-package GUI.GestionInformacion.Estacion;
+package GUI.GestionInformacion.Bus;
 
-import Control.ControlEmpleado;
-import Control.ControlEstacion;
+import Control.ControlBus;
 import GUI.PaquetePrincipal.AnclarVentanaInterna;
-import Modelo.Entidades.Empleado;
-import Modelo.Entidades.Estacion;
+import Modelo.Entidades.Bus;
 import Modelo.Validadores.LanzarMensaje;
 import Modelo.Excepciones.MiExcepcion;
 import Modelo.Validadores.Validador;
@@ -28,7 +26,7 @@ import javax.swing.border.EtchedBorder;
 
 /**
  *
- * JIFBuscarEstacion
+ * JIFBuscarBus
  * 
  * @author Mauricio Bernardo Dominguez Bocanegra. Código: 9927680
  * @author Martha Cecilia Holguin Tovar. Código: 1129455
@@ -36,7 +34,7 @@ import javax.swing.border.EtchedBorder;
  * 
  */
 
-public class JIFBuscarEstacion extends AnclarVentanaInterna {
+public class JIFBuscarBus extends AnclarVentanaInterna {
 
     /**
      * Creates new form JIFViewProfile
@@ -46,7 +44,7 @@ public class JIFBuscarEstacion extends AnclarVentanaInterna {
      * @param parentHeight
      * @throws Modelo.Excepciones.MiExcepcion
      */
-    public JIFBuscarEstacion(String title, int parentWidth, int parentHeight) throws MiExcepcion {
+    public JIFBuscarBus(String title, int parentWidth, int parentHeight) throws MiExcepcion {
         super();
         this.parentWidth = parentWidth;
         this.parentHeight = parentHeight;
@@ -61,8 +59,8 @@ public class JIFBuscarEstacion extends AnclarVentanaInterna {
         initComponents();
         initializeComponents();
         
-        actualizarEstaciones();
-        jCBCodigoEstacion.addActionListener(manejadorEventos);
+        actualizarBuses();
+        jCBPlacaBus.addActionListener(manejadorEventos);
         
     }
 
@@ -77,36 +75,36 @@ public class JIFBuscarEstacion extends AnclarVentanaInterna {
 
         jPInformacion = new javax.swing.JPanel();
         jLCodigoEstacion = new javax.swing.JLabel();
-        jTFCodigoEstacion = new javax.swing.JTextField();
-        jCBCodigoEstacion = new javax.swing.JComboBox();
+        jTFPlacaBus = new javax.swing.JTextField();
+        jCBPlacaBus = new javax.swing.JComboBox();
         jPLabels = new javax.swing.JPanel();
         jLControlPassword = new javax.swing.JLabel();
         jPControls = new javax.swing.JPanel();
         jPBotonBuscar = new javax.swing.JPanel();
         jPContenedorBoton = new javax.swing.JPanel();
-        jBBuscarEstacion = new javax.swing.JButton();
+        jBBuscarBus = new javax.swing.JButton();
 
         jPInformacion.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPInformacion.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jPInformacion.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 15, 5));
 
         jLCodigoEstacion.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLCodigoEstacion.setText("Código de la Estación: ");
+        jLCodigoEstacion.setText("Placa del bus: ");
         jPInformacion.add(jLCodigoEstacion);
 
-        jTFCodigoEstacion.setMaximumSize(new java.awt.Dimension(200, 25));
-        jTFCodigoEstacion.setMinimumSize(new java.awt.Dimension(40, 25));
-        jTFCodigoEstacion.setPreferredSize(new java.awt.Dimension(40, 25));
-        jTFCodigoEstacion.addFocusListener(new java.awt.event.FocusAdapter() {
+        jTFPlacaBus.setMaximumSize(new java.awt.Dimension(200, 25));
+        jTFPlacaBus.setMinimumSize(new java.awt.Dimension(40, 25));
+        jTFPlacaBus.setPreferredSize(new java.awt.Dimension(100, 25));
+        jTFPlacaBus.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                jTFCodigoEstacionFocusLost(evt);
+                jTFPlacaBusFocusLost(evt);
             }
         });
-        jPInformacion.add(jTFCodigoEstacion);
+        jPInformacion.add(jTFPlacaBus);
 
-        jCBCodigoEstacion.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jCBCodigoEstacion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPInformacion.add(jCBCodigoEstacion);
+        jCBPlacaBus.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCBPlacaBus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPInformacion.add(jCBPlacaBus);
 
         jPLabels.setLayout(new java.awt.GridLayout(3, 0));
         jPLabels.add(jLControlPassword);
@@ -122,30 +120,30 @@ public class JIFBuscarEstacion extends AnclarVentanaInterna {
         jPBotonBuscar.setMaximumSize(new java.awt.Dimension(610, 37));
         jPBotonBuscar.add(jPContenedorBoton);
 
-        jBBuscarEstacion.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jBBuscarEstacion.setText("BUSCAR ESTACIÓN");
-        jBBuscarEstacion.addActionListener(new java.awt.event.ActionListener() {
+        jBBuscarBus.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jBBuscarBus.setText("BUSCAR BUS");
+        jBBuscarBus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBBuscarEstacionActionPerformed(evt);
+                jBBuscarBusActionPerformed(evt);
             }
         });
-        jPBotonBuscar.add(jBBuscarEstacion);
+        jPBotonBuscar.add(jBBuscarBus);
 
         getContentPane().add(jPBotonBuscar, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jBBuscarEstacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarEstacionActionPerformed
+    private void jBBuscarBusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarBusActionPerformed
         try {
             registros = false;
             displayTab();
         } catch (MiExcepcion ex) {
-            Logger.getLogger(JIFBuscarEstacion.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JIFBuscarBus.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jBBuscarEstacionActionPerformed
+    }//GEN-LAST:event_jBBuscarBusActionPerformed
 
-    private void jTFCodigoEstacionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTFCodigoEstacionFocusLost
+    private void jTFPlacaBusFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTFPlacaBusFocusLost
                     
             /*if(jTFCodigoEstacion.getText()!=""){
                 
@@ -190,98 +188,83 @@ public class JIFBuscarEstacion extends AnclarVentanaInterna {
                 jCBCodigoEstacion.setSelectedIndex(0);
             }*/
         
-    }//GEN-LAST:event_jTFCodigoEstacionFocusLost
+    }//GEN-LAST:event_jTFPlacaBusFocusLost
 
     private void initializeComponents() {
         lanzarMensaje = new LanzarMensaje(this);
         manejadorEventos = new buscarEstacionManejadorEventos();
-        controlEstacion = new ControlEstacion();
-        controlEmpleado = new ControlEmpleado();
+        controlBus = new ControlBus();
         validador = new Validador();
         registros = true;
     }
 
-    private void actualizarEstaciones() throws MiExcepcion {
-        Estacion[] estaciones = controlEstacion.listarEstaciones();
-        if ((Arrays.asList(estaciones)).isEmpty()) {
+    private void actualizarBuses() throws MiExcepcion {
+        Bus[] buses = controlBus.listarBuses();
+        if ((Arrays.asList(buses)).isEmpty()) {
             
             if(!registros){
                 dispose();
             }
-            throw new MiExcepcion("No hay estaciones registradas en la base de datos.");            
+            throw new MiExcepcion("No hay buses registrados en la base de datos.");            
         }
         
-        String[] codigos = new String[estaciones.length+1];
+        String[] placas = new String[buses.length+1];
         
-        codigos[0] = "Seleccione el código de la estación...";
+        placas[0] = "Seleccione la placa del bus...";
         
-        for(int i=1; i<=estaciones.length; i++){
+        for(int i=1; i<=buses.length; i++){
             
-            codigos[i] = estaciones[i-1].getId() + " " + estaciones[i-1].getNombre();
+            placas[i] = buses[i-1].getPlaca();
             
         }
         
-        jCBCodigoEstacion.setModel(new javax.swing.DefaultComboBoxModel(codigos));
+        jCBPlacaBus.setModel(new javax.swing.DefaultComboBoxModel(placas));
     }
-    
-    private void actualizarListaEmpleados() throws MiExcepcion {
-        Empleado[] empleados = controlEmpleado.listarEmpleados();
-        if ((Arrays.asList(empleados)).isEmpty()) {
-            throw new MiExcepcion("No hay empleados registrados en la base de datos.");
-        }
-        
-        String[] cedulas = new String[empleados.length+1];
-        
-        cedulas[0] = "Seleccione la cédula del director...";
-        
-        for(int i=1; i<=empleados.length; i++){
             
-            cedulas[i] = empleados[i-1].getCedula();
-            
-        }
-        
-        jCBCedulaDirector.setModel(new javax.swing.DefaultComboBoxModel(cedulas));
-    }
-
-    
     private void displayTab() throws MiExcepcion {
         // Bloqueamos el boton Buscar
-        jBBuscarEstacion.setEnabled(false);
-        jTFCodigoEstacion.setEditable(false);
-        jCBCodigoEstacion.setEnabled(false);
+        jBBuscarBus.setEnabled(false);
+        jTFPlacaBus.setEditable(false);
+        jCBPlacaBus.setEnabled(false);
         // Desbloqueamos el Internal Frame     
         setLocked(false);
         // Definimos un nuevo tamaño.
-        setSize(WIDTH_, 280);
+        setSize(WIDTH_, 320);
         // Definimos el layot del panel...  
         jPUpdatePassword = new JPanel();
         jPUpdatePassword.setLayout(new BorderLayout());
         jPUpdatePassword.setBorder(new EtchedBorder());
         // Creamos un panel para las etiquetas.
         JPanel jPUpdateLabels = new JPanel();
-        jPUpdateLabels.setLayout(new GridLayout(3, 1));
+        jPUpdateLabels.setLayout(new GridLayout(4, 1));
         // Creamos las etiquetas.
-        JLabel jLCurrent = new JLabel("Nombre:");
-        JLabel jLNew = new JLabel("Dirección:");
-        JLabel jLRetype = new JLabel("Cédula Director:");
+        JLabel jLModelo = new JLabel("Modelo:");
+        JLabel jLMarca = new JLabel("Marca:");
+        JLabel jLCapacidad = new JLabel("Capacidad:");
+        JLabel jLTipo = new JLabel("Tipo");
         // Añadimos las etiquetas.
-        jPUpdateLabels.add(jLCurrent);
-        jPUpdateLabels.add(jLNew);
-        jPUpdateLabels.add(jLRetype);
+        jPUpdateLabels.add(jLModelo);
+        jPUpdateLabels.add(jLMarca);
+        jPUpdateLabels.add(jLCapacidad);
+        jPUpdateLabels.add(jLTipo);
         // Creamos el panel para los campos de contraseña.
         JPanel jPUpdateTF = new JPanel();
-        jPUpdateTF.setLayout(new GridLayout(3, 1));
+        jPUpdateTF.setLayout(new GridLayout(4, 1));
         // Campos de contraseña.
-        jTFNombre = new JTextField();
-        jTFDireccion = new JTextField();
-        jCBCedulaDirector = new JComboBox(); 
+        jTFModelo = new JTextField();
+        jTFMarca = new JTextField();
+        jTFCapacidad = new JTextField();
+        jCBTipo = new JComboBox(); 
         
-        actualizarListaEmpleados();        
+        String[] opciones = {"Seleccione el tipo de bus...", "ARTICULADO", "PADRON", "ALIMENTADOR"};
+        
+        jCBTipo.setModel(new javax.swing.DefaultComboBoxModel(opciones));            
         
         // Añadimos los campos de texto al panel
-        jPUpdateTF.add(jTFNombre);
-        jPUpdateTF.add(jTFDireccion);
-        jPUpdateTF.add(jCBCedulaDirector);
+        jPUpdateTF.add(jTFModelo);
+        jPUpdateTF.add(jTFMarca);
+        jPUpdateTF.add(jTFCapacidad);
+        jPUpdateTF.add(jCBTipo);
         
         jPBotonesModificar = new JPanel();
         jPBotonesModificar.setLayout(new FlowLayout());
@@ -298,25 +281,27 @@ public class JIFBuscarEstacion extends AnclarVentanaInterna {
         
         jPBotonesModificar.setVisible(false);
         
-        String codigo = jTFCodigoEstacion.getText().trim();
+        String placa = jTFPlacaBus.getText().trim();
         
-        Estacion estacion = controlEstacion.buscarEstacion(codigo);
+        Bus bus = controlBus.buscarBus(placa);
         
-        jTFNombre.setText(estacion.getNombre());
-        jTFDireccion.setText(estacion.getDireccion());
+        jTFModelo.setText(bus.getModelo());
+        jTFMarca.setText(bus.getMarca());
+        jTFCapacidad.setText("" + bus.getCapacidad());
                 
-        for(int i=1; i<=jCBCedulaDirector.getItemCount(); i++) {
-                        
-            if(estacion.getCedulaDirector().equals(jCBCedulaDirector.getItemAt(i))) {
-                jCBCedulaDirector.setSelectedIndex(i);
+        for(int i=1; i<=(jCBTipo.getItemCount()-1); i++) {
+                       
+            if(bus.getTipo().equalsIgnoreCase((String)jCBTipo.getItemAt(i))) {
+                jCBTipo.setSelectedIndex(i);
                 break;
             }
             
         }
         
-        jTFNombre.setEditable(false);
-        jTFDireccion.setEditable(false);
-        jCBCedulaDirector.setEnabled(false);
+        jTFModelo.setEditable(false);
+        jTFMarca.setEditable(false);
+        jTFCapacidad.setEditable(false);
+        jCBTipo.setEnabled(false);
         
         // Creamos un panel para los botones
         JPanel jPUpdateButtons = new JPanel();
@@ -368,16 +353,17 @@ public class JIFBuscarEstacion extends AnclarVentanaInterna {
 
     private void retractTab() {
         // Limpiamos los campos.
-        this.jTFNombre.setText("");
-        this.jTFDireccion.setText("");
-        this.jCBCedulaDirector.setSelectedIndex(0);
-        this.jTFCodigoEstacion.setText("");
-        this.jCBCodigoEstacion.setSelectedIndex(0);
+        this.jTFModelo.setText("");
+        this.jTFMarca.setText("");
+        this.jTFCapacidad.setText("");
+        this.jCBTipo.setSelectedIndex(0);
+        this.jTFPlacaBus.setText("");
+        this.jCBPlacaBus.setSelectedIndex(0);
         // Debemos recoger la ventana y retirar los componentes.
         // Reactivamos el boton editar.
-        jBBuscarEstacion.setEnabled(true);
-        jTFCodigoEstacion.setEditable(true);
-        jCBCodigoEstacion.setEnabled(true);
+        jBBuscarBus.setEnabled(true);
+        jTFPlacaBus.setEditable(true);
+        jCBPlacaBus.setEnabled(true);
         // Retiramos los componentes:
         this.jPBotonBuscar.remove(jPUpdatePassword);
         jPBotonBuscar.setLayout(new FlowLayout());
@@ -390,8 +376,8 @@ public class JIFBuscarEstacion extends AnclarVentanaInterna {
     }
       
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBBuscarEstacion;
-    private javax.swing.JComboBox jCBCodigoEstacion;
+    private javax.swing.JButton jBBuscarBus;
+    private javax.swing.JComboBox jCBPlacaBus;
     private javax.swing.JLabel jLCodigoEstacion;
     private javax.swing.JLabel jLControlPassword;
     private javax.swing.JPanel jPBotonBuscar;
@@ -399,7 +385,7 @@ public class JIFBuscarEstacion extends AnclarVentanaInterna {
     private javax.swing.JPanel jPControls;
     private javax.swing.JPanel jPInformacion;
     private javax.swing.JPanel jPLabels;
-    private javax.swing.JTextField jTFCodigoEstacion;
+    private javax.swing.JTextField jTFPlacaBus;
     // End of variables declaration//GEN-END:variables
     private final int parentWidth;
     private final int parentHeight;
@@ -408,9 +394,10 @@ public class JIFBuscarEstacion extends AnclarVentanaInterna {
     private JButton jBBuscar;
     private JButton jBGuardarModificaciones;
     private JButton jBCancelar;
-    private JTextField jTFNombre;
-    private JTextField jTFDireccion;
-    private JComboBox jCBCedulaDirector;
+    private JTextField jTFModelo;
+    private JTextField jTFMarca;
+    private JTextField jTFCapacidad;
+    private JComboBox jCBTipo;
     private JPanel jPUpdatePassword;
     private JPanel jPBotonesModificar;
     private LanzarMensaje lanzarMensaje;
@@ -418,8 +405,7 @@ public class JIFBuscarEstacion extends AnclarVentanaInterna {
     private final static int WIDTH_ = 650;
     private final static int HEIGHT_ = 120;
     private Validador validador;
-    private ControlEstacion controlEstacion;
-    private ControlEmpleado controlEmpleado;
+    private ControlBus controlBus;
     private boolean registros;
     
     private class buscarEstacionManejadorEventos implements ActionListener {
@@ -427,34 +413,21 @@ public class JIFBuscarEstacion extends AnclarVentanaInterna {
         @Override
         public void actionPerformed(ActionEvent e) {
             
-            if(e.getSource() == jCBCodigoEstacion) {
+            if(e.getSource() == jCBPlacaBus) {
                 
                 try{
-                    if(jCBCodigoEstacion.getSelectedIndex()!=0){                                                                                          
+                    if(jCBPlacaBus.getSelectedIndex()!=0){                                                                                          
                                 
-                        String informacion = (String) jCBCodigoEstacion.getSelectedItem();
-                        
-                        String codigo = "";
-                        
-                        for(int i=0; i<informacion.length(); i++) {
-                            
-                            if(informacion.charAt(i)==' ') { 
+                        String informacion = (String) jCBPlacaBus.getSelectedItem();
                                 
-                                codigo = informacion.substring(0, i);  
-                                
-                                break;
-                                
-                            }
-                        } 
-                         
-                        jTFCodigoEstacion.setText(codigo);
+                        jTFPlacaBus.setText(informacion);
                         
                     }else{
-                        jTFCodigoEstacion.setText("");
+                        jTFPlacaBus.setText("");
                     }
                     
                 } catch (Exception ex){
-                    jTFCodigoEstacion.setText("");
+                    jTFPlacaBus.setText("");
                 }          
             }
             
@@ -465,48 +438,44 @@ public class JIFBuscarEstacion extends AnclarVentanaInterna {
                 jBEliminar.setEnabled(false);
                 jBBuscar.setEnabled(false);
                 
-                jTFNombre.setEditable(true);
-                jTFDireccion.setEditable(true);
-                jCBCedulaDirector.setEnabled(true);
+                jTFModelo.setEditable(true);
+                jTFMarca.setEditable(true);
+                jTFCapacidad.setEditable(true);
+                jCBTipo.setEnabled(true);
                 
             }
             
             if(e.getSource() == jBGuardarModificaciones) {
                 
-                String[] informacion = new String[4];
-                informacion[0] = jTFCodigoEstacion.getText();
-                informacion[1] = jTFNombre.getText().toUpperCase();
-                informacion[2] = jTFDireccion.getText().toUpperCase();
-                informacion[3] = (String) jCBCedulaDirector.getSelectedItem();
+                String[] informacion = new String[5];
+                informacion[0] = jTFPlacaBus.getText().trim();
+                informacion[1] = jTFModelo.getText().trim();
+                informacion[2] = jTFMarca.getText().trim().toUpperCase();
+                informacion[3] = jTFCapacidad.getText().trim();
+                informacion[4] = (String) jCBTipo.getSelectedItem();
                 
                 try {
-                                        
-                    validador.validarCampoVacio(informacion[1], "NOMBRE");
-                    validador.validarCampoVacio(informacion[2], "DIRECCIÓN");
-                    
-                    if(jCBCedulaDirector.getSelectedItem()==jCBCedulaDirector.getItemAt(0)) {
+                                         
+                    validador.validarCadenaNumeros(informacion[1], "El MODELO del bus ");
+                    validador.validarLongitudCadena(informacion[1], "El MODELO", 4);                       
+                    validador.validarCadenaNumeros(informacion[3], "La CAPACIDAD del bus ");
 
-                        lanzarMensaje.mostrarMessageDialog("Debe seleccionar la cédula del director.", title, JOptionPane.INFORMATION_MESSAGE); 
+                    if("".equals(informacion[3])) {
+                            informacion[3] = "0";            
+                    }
 
-                    } else {
+                    if (jCBTipo.getSelectedItem()==jCBTipo.getItemAt(0)) {
 
-                    Estacion[] estacion = controlEstacion.yaEsDirector(informacion[3]);
-
-                    if ((Arrays.asList(estacion)).isEmpty()) {
-
-                        controlEstacion.modificarEstacion(informacion);
-                        lanzarMensaje.mostrarMessageDialog("La estación ha sido modificada en la base de datos con éxito.", title, JOptionPane.INFORMATION_MESSAGE);
-                        actualizarEstaciones();
+                        lanzarMensaje.mostrarMessageDialog("Debe seleccionar el tipo de bus.", title, JOptionPane.INFORMATION_MESSAGE);                 
 
                     }else {
 
-                        lanzarMensaje.mostrarMessageDialog("No se pudo modificar la estación, ya que el empleado con la cédula " + informacion[3] 
-                                + " ya es director de la estación " + estacion[0].getNombre(), 
-                                title, JOptionPane.ERROR_MESSAGE);              
+                        controlBus.modificarBus(informacion);
+                        lanzarMensaje.mostrarMessageDialog("El bus ha sido modificado en la base de datos con éxito.", title, JOptionPane.INFORMATION_MESSAGE);
+                        actualizarBuses();                                             
 
                     }
-                    }                   
-                    
+            
                 } catch (MiExcepcion ex) {
                     lanzarMensaje.mostrarMessageDialog(ex.getMessage(), title, JOptionPane.ERROR_MESSAGE);
                 }
@@ -522,12 +491,12 @@ public class JIFBuscarEstacion extends AnclarVentanaInterna {
             
             if(e.getSource() == jBEliminar) {
                 
-                String codigo = jTFCodigoEstacion.getText();
+                String placa = jTFPlacaBus.getText();
                 
                 try {
-                    controlEstacion.eliminarEstacion(codigo);
-                    lanzarMensaje.mostrarMessageDialog("La estación fue eliminada con éxito.", title, JOptionPane.INFORMATION_MESSAGE);
-                    actualizarEstaciones();                    
+                    controlBus.eliminarBus(placa);
+                    lanzarMensaje.mostrarMessageDialog("El bus fue eliminado con éxito.", title, JOptionPane.INFORMATION_MESSAGE);
+                    actualizarBuses();                    
                 } catch (MiExcepcion ex) {
                     
                     lanzarMensaje.mostrarMessageDialog(ex.getMessage(), title, JOptionPane.ERROR_MESSAGE);

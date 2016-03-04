@@ -5,42 +5,16 @@ import Modelo.Validadores.LanzarMensaje;
 import Modelo.Excepciones.MiExcepcion;
 import GUI.Fondo.JPFondo;
 import GUI.FechaSistema.JPFechaSistema;
+import GUI.GestionInformacion.Bus.JIFBuscarBus;
+import GUI.GestionInformacion.Bus.JIFCrearBus;
 import GUI.GestionInformacion.Estacion.JIFBuscarEstacion;
 import GUI.GestionInformacion.Estacion.JIFCrearEstacion;
 import GUI.Reportes.Listados.JIFListaEstaciones;
 import Modelo.Entidades.Estacion;
-/*import Control.EmployeeControl;
-import Control.OfficeControl;
-import Control.UseraccountControl;
-import GUI.Background.JPBackground;
-import GUI.Login.JPLogin;
-import GUI.Parametrization.Employee.JIFEmployee;
-import GUI.Parametrization.Offices.JIFOffices;
-import GUI.Parametrization.Payroll.JIFPayrollConcepts;
-import GUI.Payroll.PayrollPeriod.JIFPayrollPeriod;
-import GUI.Parametrization.Users.JIFUser;
-import GUI.Parametrization.Users.JIFViewProfile;
-import GUI.Payroll.LiquidatePayroll.JIFLiquidatePayroll;
-import GUI.Reports.Graphics.JIFGraphicsEmployeesPayrollPeriod;
-import GUI.Reports.Listings.JIFEmployeeList;
-import GUI.Reports.Listings.JIFOfficesList;
-import GUI.Reports.Listings.JIFUseraccountsList;
-import GUI.Reports.Payroll.JIFPaycheck;
-import GUI.Reports.Payroll.JIFPaymentReceipt;
-import GUI.SystemDate.JPSystemDate;
-import Model.Entities.Employee;
-import Model.Entities.Office;
-import Model.Entities.Useraccount;
-import Model.Utils.FileManager;*/
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.GridLayout;
-import java.util.Arrays;
-import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
@@ -99,6 +73,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMGestionInformacionEstacion = new javax.swing.JMenu();
         jMICrearEstacion = new javax.swing.JMenuItem();
         jMIBMEEstacion = new javax.swing.JMenuItem();
+        jMGestionInformacionBus = new javax.swing.JMenu();
+        jMICrearBus = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMReports = new javax.swing.JMenu();
         jMListings = new javax.swing.JMenu();
         jMIListadoEstaciones = new javax.swing.JMenuItem();
@@ -170,6 +147,26 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMGestionInformacionEstacion.add(jMIBMEEstacion);
 
         jMParametrization.add(jMGestionInformacionEstacion);
+
+        jMGestionInformacionBus.setText("Buses");
+
+        jMICrearBus.setText("Crear");
+        jMICrearBus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMICrearBusActionPerformed(evt);
+            }
+        });
+        jMGestionInformacionBus.add(jMICrearBus);
+
+        jMenuItem2.setText("Buscar, Modificar y Eliminar");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMGestionInformacionBus.add(jMenuItem2);
+
+        jMParametrization.add(jMGestionInformacionBus);
 
         jMBMenu.add(jMParametrization);
 
@@ -440,6 +437,26 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             lanzarMensaje.mostrarMessageDialog(ex.getMessage(), "Buscar Estación", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jMIBMEEstacionActionPerformed
+
+    private void jMICrearBusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMICrearBusActionPerformed
+        try {
+            JIFCrearBus internalFrame = new JIFCrearBus("Crear Bus", (int) getSize().width, (int) getSize().height);
+            fondo.add(internalFrame);
+            internalFrame.setVisible(true);
+        } catch (MiExcepcion ex) {
+            lanzarMensaje.mostrarMessageDialog(ex.getMessage(), "Crear Bus", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jMICrearBusActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        try {
+            JIFBuscarBus internalFrame = new JIFBuscarBus("Buscar Bus", (int) getSize().width, (int) getSize().height);
+            fondo.add(internalFrame);
+            internalFrame.setVisible(true);
+        } catch (MiExcepcion ex) {
+            lanzarMensaje.mostrarMessageDialog(ex.getMessage(), "Buscar Bus", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
    
     /**
      * setAppearance Metodo encargado de poner el Look And Feel del Frame.
@@ -574,11 +591,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator aJSOffices;
     private javax.swing.JMenuBar jMBMenu;
     private javax.swing.JMenu jMFile;
+    private javax.swing.JMenu jMGestionInformacionBus;
     private javax.swing.JMenu jMGestionInformacionEstacion;
     private javax.swing.JMenu jMGraphics;
     private javax.swing.JMenu jMHelp;
     private javax.swing.JMenuItem jMIAbout;
     private javax.swing.JMenuItem jMIBMEEstacion;
+    private javax.swing.JMenuItem jMICrearBus;
     private javax.swing.JMenuItem jMICrearEstacion;
     private javax.swing.JMenuItem jMIFileClose;
     private javax.swing.JMenuItem jMIFileLogout;
@@ -593,6 +612,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMParametrization;
     private javax.swing.JMenu jMReports;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPopupMenu.Separator jSFile01;
     private javax.swing.JPopupMenu.Separator jSParametrization01;
     // End of variables declaration//GEN-END:variables

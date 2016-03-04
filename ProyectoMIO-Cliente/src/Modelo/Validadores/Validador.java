@@ -110,19 +110,21 @@ public class Validador {
         }
     }
     
-    /*
-    * validateTelephoneNumber Validar que la longitud del numero telefonico este en un rango 0, 7, 10
-    * 
-    * @param telephoneNumber
-    * @throws MyException
-    */
-    
-    public void validarCadenaNumeros(String cadena)throws MiExcepcion{
+    public void validarLongitudCadena(String dato, String campo, int longitud) throws MiExcepcion {
+        
+        if(dato.length()==longitud) {            
+            
+        }else {
+            throw new MiExcepcion (campo + " debe ser de " + longitud + " dígitos.");
+        }
+    }
+        
+    public void validarCadenaNumeros(String cadena, String campo)throws MiExcepcion{
         
         boolean validarCadena = cadena.matches("[0-9]*");
         
         if(!validarCadena) {
-            throw new MiExcepcion ("El código de la estación debe ser de solo números.");
+            throw new MiExcepcion (campo + " debe ser de solo números.");
         }         
                             
     }
