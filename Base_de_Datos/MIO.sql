@@ -100,7 +100,7 @@ CREATE TABLE tarjeta
 	id_tarjeta INTEGER NOT NULL,
 	saldo DOUBLE PRECISION NOT NULL,	
 	cedula_empleado VARCHAR(20) NOT NULL,
-	fecha_venta DATE NOT NULL,
+	fecha_venta DATE DEFAULT CURRENT_DATE,
 	hora_venta VARCHAR(5) NOT NULL,
 	estado_tarjeta VARCHAR(20) NOT NULL,
 

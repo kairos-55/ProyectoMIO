@@ -12,13 +12,13 @@ package Modelo.Entidades;
 
 public class Tarjeta {
     
-    private String id;
+    private int id;
     private double saldo;
     private String cedulaEmpleado;
     private String fechaVenta;
     private String horaVenta;
             
-    public Tarjeta(String id, double saldo, String cedulaEmpleado, String fechaVenta, String horaVenta) {
+    public Tarjeta(int id, double saldo, String cedulaEmpleado, String fechaVenta, String horaVenta) {
         
         this.id = id;
         this.saldo = saldo;
@@ -28,11 +28,11 @@ public class Tarjeta {
         
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 

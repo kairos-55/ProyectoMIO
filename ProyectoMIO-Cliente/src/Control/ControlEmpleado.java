@@ -162,6 +162,37 @@ public class ControlEmpleado extends Control {
         }
     }
     
+    public Empleado[] listarEmpleadosCargo(String cargo) throws MiExcepcion {
+        sqlStatement = "SELECT * FROM empleado WHERE estado_empleado = TRUE AND cargo = '" + cargo + "';";
+        try {Request request = new Request();
+            request.setType("QUERY");
+            request.setSqlRequest(sqlStatement);
+            request.setColumns(9);
+            Reply ok = administradorCliente.peticion(request);
+            manejadorErrores.respuesta(ok);
+            
+            ArrayList<Object[]> empleados = (ArrayList<Object[]>)ok.getPayload();
+            Empleado[] empleados_ = new Empleado[empleados.size()];
+            for (int i = 0; i < empleados.size(); i++) {
+                Object[] row = empleados.get(i);
+                Empleado empleado = new Empleado(
+                        (String)row[0], 
+                        Double.parseDouble((String)row[1]),
+                        (String)row[2],
+                        (String)row[3],
+                        (String)row[4],
+                        (String)row[5],
+                        (String)row[6],
+                        (String)row[7]                        
+                );
+                empleados_[i] = empleado;
+            }
+            return empleados_;
+        } catch (IOException | ClassNotFoundException ex) {
+            throw new MiExcepcion("Error al listar los empleados:\n" + ex.getMessage());
+        }
+    }
+    
     public int[] dimensionColumnasTabla() throws MiExcepcion {
         sqlStatement = "SELECT "                
                 + "MAX(LENGTH(cedula_empleado)), "

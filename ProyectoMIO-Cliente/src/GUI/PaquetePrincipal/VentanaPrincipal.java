@@ -14,6 +14,9 @@ import GUI.GestionInformacion.Estacion.JIFBuscarEstacion;
 import GUI.GestionInformacion.Estacion.JIFCrearEstacion;
 import GUI.GestionInformacion.Ruta.JIFBuscarRuta;
 import GUI.GestionInformacion.Ruta.JIFCrearRuta;
+import GUI.GestionInformacion.Tarjeta.JIFBuscarTarjeta;
+import GUI.GestionInformacion.Tarjeta.JIFCrearTarjeta;
+import GUI.GestionInformacion.Turno.JIFCrearTurno;
 import GUI.Reportes.Listados.JIFListaEmpleados;
 import GUI.Reportes.Listados.JIFListaEstaciones;
 import Modelo.Entidades.Empleado;
@@ -89,6 +92,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMGestionInformacionBus = new javax.swing.JMenu();
         jMICrearBus = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuItem8 = new javax.swing.JMenuItem();
         jMReports = new javax.swing.JMenu();
         jMListings = new javax.swing.JMenu();
         jMIListadoEstaciones = new javax.swing.JMenuItem();
@@ -213,6 +221,38 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMGestionInformacionBus.add(jMenuItem2);
 
         jMParametrization.add(jMGestionInformacionBus);
+
+        jMenu3.setText("Venta Tarjeta");
+
+        jMenuItem6.setText("Vender");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem6);
+
+        jMenuItem7.setText("Buscar, Modificar y Eliminar");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem7);
+
+        jMParametrization.add(jMenu3);
+
+        jMenu4.setText("Turno");
+
+        jMenuItem8.setText("Crear");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem8);
+
+        jMParametrization.add(jMenu4);
 
         jMBMenu.add(jMParametrization);
 
@@ -406,6 +446,36 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             lanzarMensaje.mostrarMessageDialog(ex.getMessage(), "Buscar Ruta", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        try {
+            JIFCrearTarjeta internalFrame = new JIFCrearTarjeta("Nueva Venta de Tarjeta", (int) getSize().width, (int) getSize().height);
+            fondo.add(internalFrame);
+            internalFrame.setVisible(true);
+        } catch (MiExcepcion ex) {
+            lanzarMensaje.mostrarMessageDialog(ex.getMessage(), "Crear Venta de Tarjeta", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        /*try {
+            JIFBuscarTarjeta internalFrame = new JIFBuscarTarjeta("Gestión de Tarjetas", (int) getSize().width, (int) getSize().height);
+            fondo.add(internalFrame);
+            internalFrame.setVisible(true);
+        } catch (MiExcepcion ex) {
+            lanzarMensaje.mostrarMessageDialog(ex.getMessage(), "Buscar Tarjeta", JOptionPane.ERROR_MESSAGE);
+        }*/
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        try {
+            JIFCrearTurno internalFrame = new JIFCrearTurno("Nuevo turno", (int) getSize().width, (int) getSize().height);
+            fondo.add(internalFrame);
+            internalFrame.setVisible(true);
+        } catch (MiExcepcion ex) {
+            lanzarMensaje.mostrarMessageDialog(ex.getMessage(), "Crear Turno", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
    
     /**
      * setAppearance Metodo encargado de poner el Look And Feel del Frame.
@@ -555,11 +625,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMReports;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JPopupMenu.Separator jSFile01;
     private javax.swing.JPopupMenu.Separator jSParametrization01;
     // End of variables declaration//GEN-END:variables
